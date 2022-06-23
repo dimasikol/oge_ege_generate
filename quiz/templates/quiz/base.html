@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <title>{% block title %} {% endblock title %}</title>
+    {% block header %} {% include "quiz/include/header.html" %} {% endblock header %}
+</head>
+<body>
+    {% block nav %} {% include "quiz/include/nav.html" %}  {% endblock nav %}
+
+    {% block body %}  {% endblock body %}
+</body>
+{% block footer %} {% include "quiz/include/footer.html" %}  {% endblock footer %}
+</html>

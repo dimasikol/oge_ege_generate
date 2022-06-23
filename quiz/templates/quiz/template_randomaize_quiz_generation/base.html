@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <title>{% block title %} {% endblock title %}</title>
+    {% block header %} {% include "quiz/include/header.html" %} {% endblock header %}
+</head>
+<body>
+    <h1>base'h1'</h1>
+    {% block nav %}{% endblock nav %}
+{% autoescape off %}
+        <style>
+        .del { display: none;}
+        .del:not(:checked)+label+*{display:none;}
+        .del:not(:checked)+label,
+        .del:checked+label {
+        display:inline-block;
+        padding:2px 10px;
+        border-radius:2px;
+        color: #fff;
+        background: #4e6473;
+        cursor:pointer;
+        }
+        .del:checked+label{
+        background: #e36443;
+        }
+    </style>
+
+    <input type ="checkbox" id = "raz" class="del">
+    <label for="raz" class="del">Тайминги получения данных</label><div style="width: 20%; float:left">>
+    {% for time in timer %}
+    <ol>{{time}}</ol>
+        {% endfor %}</div>
+            <div style="width: 80%; float:right">Добро пожаловать </div>
+
+    <form action="" method="post">
+        {% csrf_token %}
+    {% block body %}
+    {% endblock body %}
+
+    {% block quiz1 %}
+        {% include "quiz/template_randomaize_quiz_generation/quiz/quiz1.html" %}
+    {% endblock quiz1 %}
+
+    {% block quiz2 %}
+        {% include "quiz/template_randomaize_quiz_generation/quiz/quiz2.html" %}
+    {% endblock quiz2 %}
+
+    {% block quiz3 %}
+        {% include "quiz/template_randomaize_quiz_generation/quiz/quiz3.html" %}
+    {% endblock quiz3 %}
+
+    {% block quiz4 %}
+        {% include "quiz/template_randomaize_quiz_generation/quiz/quiz4.html" %}
+    {% endblock quiz4 %}
+
+    {% block quiz5 %}
+        {% include "quiz/template_randomaize_quiz_generation/quiz/quiz5.html" %}
+    {% endblock quiz5 %}
+
+    {% block quiz6 %}
+        {% include "quiz/template_randomaize_quiz_generation/quiz/quiz6.html" %}
+    {% endblock quiz6 %}
+
+    {% block quiz7 %}
+        {% include "quiz/template_randomaize_quiz_generation/quiz/quiz7.html" %}
+    {% endblock quiz7 %}
+
+    {% block quiz8 %}
+        {% include "quiz/template_randomaize_quiz_generation/quiz/quiz8.html" %}
+    {% endblock quiz8 %}
+
+    {% block quiz9 %}
+        {% include "quiz/template_randomaize_quiz_generation/quiz/quiz9.html" %}
+    {% endblock quiz9 %}
+
+    {% block quiz10 %}
+        {% include "quiz/template_randomaize_quiz_generation/quiz/quiz10.html" %}
+    {% endblock quiz10 %}
+
+        <button type="submit"><b>save result</b></button>
+</form>
+{% endautoescape %}
+
+
+    {% block footer %} {% include "quiz/include/footer.html" %}  {% endblock footer %}
+
+
+</body>
+
+</html>

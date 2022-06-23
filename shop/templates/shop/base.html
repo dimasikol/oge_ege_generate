@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <title>{% block title %} {% endblock title %}</title>
+    {% block header %} {% include "shop/include/header.html" %} {% endblock header %}
+</head>
+<body>
+    {% block nav %} {% include "shop/include/nav.html" %}  {% endblock nav %}
+
+    {% block body %}  {% endblock body %}
+</body>
+{% block footer %} {% include "shop/include/footer.html" %}  {% endblock footer %}
+</html>

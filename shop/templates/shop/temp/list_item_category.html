@@ -1,0 +1,26 @@
+{% extends "shop/base.html" %}
+
+{% block title %}{{ object_list.subclass_set.0 }} {% endblock title %}
+
+{% block body %}
+<div class="container">
+<div class="row">
+{% for object in object_list %}
+    <div class="col-3" align="center">
+    <div class="card" style="width: 18rem;">
+  <img src="{{ object.image.url }}" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">{{ object.name }}</h5>
+    <p class="card-text">{{object.description }}</p>
+           <div >
+      <a href="{{ object.url }}" class="btn btn-primary">Подробней<br> о товаре</a>
+  </div>
+      <hr>
+      <input type="number" width="10" height="10" max="10" min="0" value="0"></div>
+    </div>
+
+    </div>
+{% endfor %}
+</div>
+</div>
+{% endblock body %}

@@ -1,0 +1,28 @@
+{% extends 'shop/base.html' %}
+{% block title %}Категории{% endblock title %}
+{% block body %}
+
+
+<div class="row">
+
+{% for object in object_list %}
+<div class="card mb-3" style="max-width: 640px;">
+  <div class="row g-0">
+    <div class="col-md-4">
+      <img src="{{ object.image.url }}"  alt="в обработке" width="379" height="333">
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title" align="right">{{ object.name }}</h5>
+        <p class="card-text" align="right">{{ object.description }}</p>
+          <a href="{{ object.url }}"><p class="card-text" align="right"><small class="text-muted">перейти к списку</small></p></a>
+      </div>
+    </div>
+  </div>
+</div>
+       {% endfor %}
+    </div>
+{% endblock body %}
+
+
+

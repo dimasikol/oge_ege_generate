@@ -1,0 +1,20 @@
+{% extends "quiz/base.html" %}
+{% block body %}
+<div class="container">
+    <div class="col-0">
+<form action="quiz_create" method="get">
+<p>Задание №1) <input type="number" min ="0" max="10" placeholder="0" name = "quiz1" value="0"></p>
+<p>Задание №2) <input type="number" min ="0" max="10" placeholder="0" name = "quiz2" value="0" disabled="disabled"></p>
+<p>Задание №3) <input type="number" min ="0" max="10" placeholder="0" name = "quiz3" value="0" disabled="disabled"></p>
+<p>Задание №4) <input type="number" min ="0" max="10" placeholder="0" name = "quiz4" value="0"></p>
+<p>Задание №5) <input type="number" min ="0" max="10" placeholder="0" name = "quiz5" value="0"></p>
+<p>Задание №6) <input type="number" min ="0" max="10" placeholder="0" name = "quiz6" value="0"></p>
+<p>Задание №7) <input type="number" min ="0" max="10" placeholder="0" name = "quiz7" value="0"></p>
+<p>Задание №8) <input type="number" min ="0" max="10" placeholder="0" name = "quiz8" value="0"></p>
+<p>Задание №9) <input type="number" min ="0" max="10" placeholder="0" name = "quiz9" value="0" disabled="disabled" ></p>
+<p>Задание №10) <input type="number" min ="0" max="10" placeholder="0" name = "quiz10" value="0"></p>
+    <input type="submit">
+</form>
+</div>
+</div>
+    {% endblock body %}
