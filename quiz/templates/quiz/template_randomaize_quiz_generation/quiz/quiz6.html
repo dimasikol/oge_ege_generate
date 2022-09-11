@@ -1,28 +1,26 @@
 
-<div class="container">
     {% for item in answer6 %}
 
-    <div class="col-0">
-        <h1>Задание№6({{ item.type_quiz }})</h1>
-        <h3>Ниже приведена программа, записанная на языке программирование "Python".</h3>
+<div class="container card-body col-md-9 border border-primary shadow-lg p-3 mb-5 bg-body rounded">
+        <h5>Задание № 6</h5>
+        <h6>Ниже приведена программа, записанная на языке программирование "Python".</h6>
         <div class="col-6">
          <table class="table table-bordered">
             <thead  class="thead-inverse">
                 <tr>
-                  <td scope="col"><h3>Python</h3></td>
+                  <td scope="col"><h6>Python</h6></td>
                 </tr>
                 <tr>
-                    <td>{{ item.quiz }} </td>
+                    <td><h6>{{ item.quiz }}</h6> </td>
                 </tr>
             </thead>
          </table>
         </div>
 
-   <h3>Было проведено 9 запусков программы, при которых в качестве значений переменных s и t вводились следующие пары чисел:</h3>
-   <h3>{{ item.variant }}</h3>
-   <h3>Сколько было запусков, при которых программа напечатала {{ item.YES_OR_NO }}</h3>
-    </div>
+   <h6>Было проведено 9 запусков программы, при которых в качестве значений переменных s и t вводились следующие пары чисел:</h6>
+   <h6>{{ item.variant }}</h6>
+   <h6>Сколько было запусков, при которых программа напечатала {{ item.YES_OR_NO }}</h6>
     <h5>Ответ:<input type="text" name="answer6" width="200" height="30"></h5>
+        </div>
 
     {% endfor %}
-</div>

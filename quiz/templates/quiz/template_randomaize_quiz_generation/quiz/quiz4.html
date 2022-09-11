@@ -1,28 +1,27 @@
 
 {% for item in answer4 %}
 
-<div class="container" >
-  <h1>Задание № 4</h1>
+<div class="container card-body col-md-9 border border-primary shadow-lg p-3 mb-5 bg-body rounded">
 
-   <h3>Между населёнными пунктами А, В, С, D, Е, F, G построены дороги, протяжённость которых (в километрах) приведена в таблице:</h3>
+  <h5>Задание № 4</h5>
+
+   <h6>Между населёнными пунктами А, В, С, D, Е, F, G построены дороги, протяжённость которых (в километрах) приведена в таблице:</h6>
 
   <div class="col-6">
   <table class="table table-bordered">
   <tbody>
 
-    <h3>{% for items in item.quiz %}</h3>
+    <h6>{% for items in item.quiz %}</h6>
     <tr>
     {% for iter in items %}
-      <td><h4>{{ iter }}</h4></td>
+      <td><h6>{{ iter }}</h6></td>
       {% endfor %}
     </tr>
     {% endfor %}
     </tbody>
 </table>
       </div>
-          <h3>Определите длину кратчайшего пути между пунктами А и G. Передвигаться можно только по дорогам, протяжённость которых указана в таблице.</h3>
-
-  <h5>Ответ:<input type="text" name="answer8" width="200" height="30"></h5>
-  <h3>{{ item.answer }}</h3>
+          <h6>Определите длину кратчайшего пути между пунктами А и G. Передвигаться можно только по дорогам, протяжённость которых указана в таблице.</h6>
+  <h5>Ответ:<input type="text" name="answer4" width="200" height="30"></h5>
 </div>
 {% endfor%}

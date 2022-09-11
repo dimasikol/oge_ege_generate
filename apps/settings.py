@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'nested_admin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -42,13 +43,20 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'djoser',
+    'crispy_forms',
+    'crispy_bootstrap5',
 
     'lk',
     'users',
     'apps',
     'quiz',
     'shop',
+    'privatmessages',
 ]
+
+#    'debug_toolbar',
+
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -58,6 +66,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
+
 ]
 
 ROOT_URLCONF = 'apps.urls'
@@ -115,16 +125,18 @@ AUTH_PASSWORD_VALIDATORS = [
 
 
 #smtp
-EMAIL_USE_TLS = True
-EMAIL_HOST = 'smtp.yandex.com'
-EMAIL_HOST_USER = 'no_replay@sch1190.ru'
-EMAIL_HOST_PASSWORD = 'Dima9194!'
+EMAIL_HOST = 'smtp.yandex.ru'
 EMAIL_PORT = 465
-
+EMAIL_HOST_USER = "no_replay@sch1190.ru"
+EMAIL_HOST_PASSWORD = "Dima9194!"
+EMAIL_USE_TLS = False
+EMAIL_USE_SSL = True
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
     'DEFAULT_FILTER_BACKEND':(
@@ -167,10 +179,21 @@ SIMPLE_JWT = {
 
 }
 
+CRISPY_ALLOWED_TEMPLATE_PACKS = 'bootstrap5'
+CRISPY_TEMPLATE_PACK = 'bootstrap5'
+
+
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+# INTERNAL_IPS = [
+#     "127.0.0.1",
+# ]
+
+LOGIN_REDIRECT_URL = 'home'
+LOGOUT_REDIRECT_URL = 'home'
+
+LANGUAGE_CODE = 'ru-ru'
 
 TIME_ZONE = 'UTC'
 
@@ -187,8 +210,8 @@ STATIC_URL = 'static/'
 CKEDITOR_UPLOAD_PATH = "uploads/"
 STATIC_URL = 'static/'
 #STATIC_ROOT = os.path.join(BASE_DIR,'static')
-MEDIA_URL = 'media/'
-MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR,'media/')
 
 STATICFILES_DIRS = [
    os.path.join(BASE_DIR, "static"),

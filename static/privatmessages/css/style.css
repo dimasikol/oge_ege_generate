@@ -1,0 +1,10 @@
+
+#buttonmessageform{
+    vertical-align: bottom;
+}
+
+#id_message{
+    width:auto;
+    height:30px;
+    vertical-align: top;
+}

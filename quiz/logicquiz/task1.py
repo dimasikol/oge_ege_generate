@@ -4,7 +4,6 @@ from . import generate_answer
 import os
 from apps.settings import BASE_DIR
 with open(os.path.join(BASE_DIR, r'quiz/logicquiz/scratch_1.json'), 'r', encoding='UTF-8') as file:
-    print('try')
     date = json.load(file)
 
 class Task1:
@@ -42,7 +41,7 @@ class Task1:
         else:
             self.words_variable2 = self.words_variable.copy()
             self.words_variable2.pop(self.words_variable.index(self.words_answer))
-            self.write_answer3 = self.write_answer[:54] + str(self.bit) + ' ' + self.type_bit + self.write_answer[54:104] + '" ' + ', '.join(self.words_variable2) + date['one']['2text'][:25] + self.words_answer + date['one']['2text' + str(self.sim_count)] + date['one']['2text'][26:44] + self.bit_answer + date['one']['2text'][44:] + '. '+self.words_answer
+            self.write_answer3 = self.write_answer[:54] + str(self.bit) + ' ' + self.type_bit + self.write_answer[54:104] + '" ' + ', '.join(self.words_variable2) + date['one']['2text'][:25] + self.words_answer + date['one']['2text' + str(self.sim_count)] + date['one']['2text'][26:44] + self.bit_answer + date['one']['2text'][44:] + '.'
             self.words_answer= self.choice()
             if isinstance(self.words_answer,float):
                 self.words_answer=round(self.words_answer,2)
@@ -125,8 +124,6 @@ class Task5:
         self.nums=[random.randint(1,20),random.randint(2,60)]
         self.type_znaks = [random.choice(['*','+','-']),random.choice(['*','+','-'])]
         self.spisok=random.choice(self.date['random_type']['5'])
-
-        self.quiz = 'вопрос'
         self.answer = 'ответ'
         self.variant = 'вариант'
     def create_quiz(self):
@@ -141,9 +138,9 @@ class Task5:
                    f' {self.nums[0]}<br>{self.date["keys"][self.type_znaks[1]]} ' \
                    f'b {self.text["text1"]}{self.text["text2"]} {self.date["keys"][self.type_znaks[0]]} {self.nums[0]} ' \
                    f'{self.text["text3"]} {self.date["keys"][self.type_znaks[1]]} {self.nums[1]} {self.text["text4"]} {"".join(list(map(str,self.spisok)))}' \
-                   f' {self.text["text5"]} {self.start_num} в {self.create_quiz()} {self.text["text6"]} <br> ответ :{self.nums[1]}'
+                   f' {self.text["text5"]} {self.start_num} в {self.create_quiz()} {self.text["text6"]}'
 
-        return {"quiz":self.quiz,"variant":self.variant,"answer":self.answer,"type_quiz":{Task5.Task_num}}
+        return {"quiz":self.quiz,"variant":self.variant,"answer":self.nums,"type_quiz":{Task5.Task_num}}
 
 
 class Task6:
@@ -171,7 +168,7 @@ class Task6:
         return self.count_YES
     def write(self):
         self.choice()
-        self.quiz = f"<h2>{self.text['text1']}</h2>  <br><h2>if s{self.choice_znak[0]}{self.num[0]} {self.logic} t{self.choice_znak2[0]}{self.num[1]}:<h2>&nbsp;&nbsp;&nbsp;&nbsp;print('YES')</h2><h2>else:</h2><h2>&nbsp;&nbsp;&nbsp;&nbsp;print('NO')</h2>"
+        self.quiz = f"<h6>{self.text['text1']}</h6> if s{self.choice_znak[0]}{self.num[0]} {self.logic} t{self.choice_znak2[0]}{self.num[1]}:<h6>&nbsp;&nbsp;&nbsp;&nbsp;print('YES')</h6><h6>else:</h6><h6>&nbsp;&nbsp;&nbsp;&nbsp;print('NO')</h6>"
         return {"quiz":self.quiz,"variant":self.variant,"answer":self.count_YES,"type_quiz":Task6.Task_num,"YES_OR_NO":self.YES_OR_NO}
 
 
@@ -194,9 +191,10 @@ class Task7:
         self.answer_dict = {v:k for k, v in dict(self.answer_tuple).items()}
         self.answer1 = self.answer_dict[self.protokol]+self.answer_dict['://']+self.answer_dict[self.address[0]]+self.answer_dict["."]+self.answer_dict[self.address[1]]+self.answer_dict["."]+self.answer_dict[self.address[2]]+self.answer_dict["/"]+self.answer_dict[self.path]+self.answer_dict["/"]+self.answer_dict[self.file_name]+self.answer_dict["."]+self.answer_dict[self.file_type]
         self.answer_quiz = ''.join(list(map(lambda x:f'{x[0]}) {x[1]}<br>',self.answer_tuple)))
+
     def write(self):
-        self.quiz=f"{self.date['text1']} {self.file_name}.{self.file_type} {self.date['text2']} {self.address[1]}.{self.address[2]} в директории {self.path} поддомена {self.address[0]} {self.date['text3']} {self.protokol} {self.date['text4']}<br>{self.answer_quiz}"
-        return {"quiz":self.quiz,"answer":str(self.answer1),"type_quiz":f'{Task7.Task_num}.Задание № 7'}
+        self.quiz=f"{self.date['text1']} {self.file_name}.{self.file_type} {self.date['text2']} {self.address[1]}.{self.address[2]} в директории {self.path} поддомена {self.address[0]} {self.date['text3']} {self.protokol} {self.date['text4']}"
+        return {"quiz":self.quiz,'answer_quiz':self.answer_quiz,"answer":str(self.answer1),"type_quiz":f'{Task7.Task_num}.Задание № 7'}
 
 
 class Task8:

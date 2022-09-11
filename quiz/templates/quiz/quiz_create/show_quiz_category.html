@@ -1,0 +1,25 @@
+{% extends 'quiz/base.html' %}
+
+{% block body %}
+<div class="row row-cols-1 row-cols-md-3 g-4">
+
+    {% for item in category_quiz %}
+
+        <div class="col shadow-lg p-3 mb-5 bg-body rounded">
+        <div class="card h-100">
+          <img src="{{ item.image.url }}" class="card-img-top" alt="{{ item.image }}">
+          <div class="card-body">
+            <h5 class="card-title"><a href="{% url 'quiz_category_filter' item.slug  %}">{{ item.name }}</a></h5>
+            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+          </div>
+          <div class="card-footer">
+            <small class="text-muted">Last updated 3 mins ago</small>
+          </div>
+        </div>
+      </div>
+
+
+    {% endfor %}
+</div>
+
+{% endblock body %}

@@ -1,0 +1,26 @@
+{% extends 'quiz/base.html' %}
+{% load static %}
+{% block header %}
+<link rel="stylesheet" href="{% static 'privatmessages/css/style.css' %}"/>
+{% include "lk/include/header.html" %}
+{% endblock header %}
+{% block body %}
+<div class="container col border border-primary shadow-lg p-3 mb-5 bg-body rounded" style="height:700px; border: 1px solid; overflow: auto;">
+    {% for message in chat.chat.all %}
+    <div class="row border border-primary shadow-lg" style="">
+    <div class="col-2"><a href="{% url  'lk_for_look2' message.author %}">
+    <img src="{{ message.author.profiles.image_profile.url }}" width="50" ></a>
+    </div>
+    <div class="col-9">{{ message.message }}</div>
+    <div class="col-1">{{ message.pub_date|date:'d.m.y H:i' }}</div>
+        </div>
+    {% endfor %}
+    <div class="container ">
+        <form method="post">
+            {% csrf_token %}
+            {{ form.message }}
+            <button id="buttonmessageform" type="submit" onclick="return ETextEditor.validateForm('message-form')"><span class="ico ico-comment"></span>send</button>
+        </form>
+    </div>
+</div>
+{% endblock body %}

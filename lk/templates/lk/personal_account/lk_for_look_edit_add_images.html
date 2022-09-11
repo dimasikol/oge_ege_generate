@@ -1,0 +1,76 @@
+{% extends 'lk/base.html' %}
+
+
+{% block body %}
+{% load lk_tags %}
+<p></p>
+  конец
+<form action="" method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+<div class="container ">
+<div class="card mb-3 shadow-lg p-3 mb-5 bg-body rounded" style="max-width: 1340px;">
+  <div class="row g-2">
+    <div class="col-md-5 ">
+        <img class="shadow-lg p-3 mb-5 bg-body rounded" src="{{ user_bio.profiles.image_profile.url }}" alt="фото в обработке">
+        <input type="file" name="image_profile" accept="image/*">
+
+    </div>
+    <div class="col-md-7">
+        <div class="row">
+          <div class="col-md-5 shadow-lg p-3 mb-5 bg-body rounded">
+          <label for="first_name">Имя:</label>
+          <h4 class="card-text" style=""><input class="form-control" id="first_name" type="text" name="first_name" value="{{ user_bio.first_name }}"/></h4>
+
+          <label for="last_name">Фамилия:</label>
+          <h4 class="card-text"><input class="form-control" id="last_name" type="text" name="last_name" value="{{ user_bio.last_name }}"/></h4>
+
+          <label for="Email">Email:</label>
+          <h4 class="card-text"><input class="form-control" id="Email" type="email" name="email" value="{{ user_bio.email }}"/></h4>
+
+          </div>
+
+          <div class="col">
+            <label for="about">о себе</label>
+            <h4 class="card-text" id="about" ><textarea class="form-control" name="about" style="display: inline-block;" rows="8">{{ user_bio.profiles.about }}</textarea></h4>
+          </div>
+            <hr style="with:4 px;">
+  <div>
+      <div class="row">
+      <div class="col-md-5 shadow-lg p-3 mb-5 bg-body rounded">
+
+<label for="location">страна</label>
+            <h4 class="card-text"><input class="form-control" id="location" type="text" name="location" value="{{ user_bio.profiles.location }}"/></h4>
+            <label for="city">город</label>
+            <h4 class="card-text"><input class="form-control" id="city" type="text" name="city" value="{{ user_bio.profiles.city }}"/></h4>
+            <label for="birthday">дата рождения</label>
+            <h4 class="card-text"><input id="birthday" type="date" name="birthday" class="form-control" value="{{ user_bio.profiles.birthday|date:'Y-m-d' }}"></h4>
+
+<label for="zodiac">знак зодиака: </label>
+    <select class="form-select" name="zodiac" id="zodiac">
+        <option class="form-select" value="{{ user_bio.profiles.zodiac }}" selected>{{ user_bio.profiles.zodiac }}</option>
+        {% for item in user_bio.profiles.DATA.zodiac %}
+            <option value="{{ item.0 }}">{{ item.1 }}</option>
+        {% endfor %}
+    </select>
+<label for="socionics_type">социопортрет: </label>
+    <select class="form-select" name="socionics_type" id="socionics_type">
+        <option value="{{ user_bio.profiles.socionics_type }}" selected>{{ user_bio.profiles.socionics_type }}</option>
+
+        {% for item in user_bio.profiles.DATA.socionics_type %}
+            <option value="{{ item.0 }}">{{ item.1 }}</option>
+        {% endfor %}
+    </select>
+                </div>
+            <div class="col-md-7 shadow-lg p-3 mb-5 bg-body rounded">
+            </div>
+          </div>
+        </div>
+    </div>
+
+  </div>
+  <button type="submit" >принять</button>
+  </div>
+</div>
+</div>
+</form>
+{%endblock body %}

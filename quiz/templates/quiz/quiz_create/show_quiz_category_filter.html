@@ -1,0 +1,10 @@
+{% extends 'quiz/base.html' %}
+
+{% block body %}
+
+{% for item in quizs %}
+
+<a href="{% url 'show_quiz' item.category_quiz.slug item.slug_quiz %}">{{ item }}</a>
+
+{% endfor %}
+{% endblock body %}

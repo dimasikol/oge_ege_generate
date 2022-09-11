@@ -1,10 +1,16 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+
+    <title>{% block title %} {% endblock title %}</title>
+    {% block header %} {% include "lk/include/header.html" %} {% endblock header %}
 </head>
 <body>
+    {% block nav %} {% include "lk/include/nav.html" %}  {% endblock nav %}
 
+    {% block body %}  {% endblock body %}
 </body>
+{% block footer %} {% include "shop/include/footer.html" %}  {% endblock footer %}
 </html>

@@ -1,0 +1,44 @@
+{% extends 'lk/base.html' %}
+
+{% block title %}Вход в систему{% endblock title %}
+{% load crispy_forms_tags %}
+
+
+{% block body %}
+
+
+        <div class="container">
+        <div class="form-floating">
+        <form class="form-signin" method="post">
+                {% csrf_token %}
+                <div class="d-flex flex-column pb-3">
+                Welcome
+                </div>
+                <input type="text" name="username" id="inputUsername" class="form-control" placeholder="User name" required>
+
+                <p></p>
+                <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
+
+                {% for field in login_form %}
+                <p>
+                {% for error in field.errors %}
+                <p style="color: red;">{{ error }}</p>
+                {% endfor %}
+                </p>
+                {% endfor %}
+                {% if login_form.non_field_errors %}
+                <div style="color:red;"><p>{{ login_form.non_field_errors }}</p></div>
+
+                {% endif %}
+
+
+                <div class="container">
+                нет аккаутра? <a href="{% url 'sing_up' %}">Зарегистритуйтесь</a>
+                </div>
+                <button type ="submit" class="btn btn-success">войти</button>
+        </form>
+
+        </div>
+        </div>
+{% endblock body %}
+

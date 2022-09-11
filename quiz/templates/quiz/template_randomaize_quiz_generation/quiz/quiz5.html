@@ -1,13 +1,13 @@
 
 
+{% for item in answer5 %}
 
-<div class="container">
-    <h1>{{ item.type_quiz }}.Задание № 5</h1>
-    {% for item in answer5 %}
+<div class="container card-body col-md-9 border border-primary shadow-lg p-3 mb-5 bg-body rounded">
+    <h5>Задание № 5</h5>
     <div class="col-0">
-   <h3>{{ item.quiz }} </h3>
+   <h6>{{ item.quiz }} </h6>
     </div>
     <h5>Ответ:<input type="text" name="answer5" width="200" height="30"></h5>
-
+    </div>
     {% endfor %}
-</div>
+

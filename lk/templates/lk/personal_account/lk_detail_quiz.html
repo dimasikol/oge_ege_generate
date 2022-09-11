@@ -1,0 +1,198 @@
+{% extends 'lk/base.html' %}
+{% load lk_tags %}
+{% block body %}
+{% autoescape off %}
+<div class="container">
+{% for item in context.quiz.answer1 %}
+    <div class="container border border-primary">
+    <p>Задание № 1</p>
+    <p> {{ item.quiz }}</p>
+
+    <p>Примечание,если число дробное, округлите до сотых.</p>
+    <p style="color:green; font-style: italic;">Правильный ответ: {{ item.answer }}</p>
+    <p style="color:red;">Ваш ответ: {% autoescape on %} {{context.answer.answer1|get_pos:forloop.counter0 }} {% endautoescape %}</p>
+    </div>
+    <hr style="color:blue;">
+{% endfor %}
+
+{% for item in context.quiz.answer2 %}
+    <div class="container border border-primary">
+    <p>Задание № 2</p>
+    <p> {{ item.quiz }}</p>
+    <p style="color:green; font-style: italic;">Ответ: {{ item.answer }}</p>
+    <p style="color:red;">Ваш ответ: {% autoescape on %} {{context.answer.answer2|get_pos:forloop.counter0 }} {% endautoescape %}</p>
+
+    </div>
+    <hr style="color:blue;">
+{% endfor %}
+
+{% for item in context.quiz.answer3 %}
+    <div class="container border border-primary">
+    <p>Задание № 3</p>
+    <p> {{ item.quiz }}  </p>
+    <p style="color:green; font-style: italic;">Ответ: {{ item.answer }}</p>
+    <p style="color:red;">Ваш ответ: {% autoescape on %} {{context.answer.answer3|get_pos:forloop.counter0 }} {% endautoescape %}</p>
+
+    </div>
+    <hr style="color:blue;">
+{% endfor %}
+
+
+{% for item in context.quiz.answer4 %}
+    <div class="container border border-primary">
+    <div class="container" >
+  <p>Задание № 4</p>
+   <p>Между населёнными пунктами А, В, С, D, Е, F, G построены дороги, протяжённость которых (в километрах) приведена в таблице:</p>
+
+  <div class="col-6">
+  <table class="table table-bordered">
+  <tbody>
+
+    <p>{% for items in item.quiz %}</p>
+    <tr>
+    {% for iter in items %}
+      <td><p>{{ iter }}</p></td>
+      {% endfor %}
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+      </div>
+          <p>Определите длину кратчайшего пути между пунктами А и G. Передвигаться можно только по дорогам, протяжённость которых указана в таблице.</p>
+</div>
+    <p style="color:green; font-style: italic;">Ответ: {{ item.answer }}</p>
+        <p style="color:red;">Ваш ответ: {% autoescape on %} {{context.answer.answer4|get_pos:forloop.counter0 }} {% endautoescape %}</p>
+
+    </div>
+    <hr style="color:blue;">
+{% endfor %}
+
+
+{% for item in context.quiz.answer5 %}
+    <div class="container border border-primary">
+    <p>Задание № 5</p>
+    <p> {{ item.quiz }}  </p>
+
+    <p style="color:green; font-style: italic;">Ответ: {{ item.answer }}</p>
+        <p style="color:red;">Ваш ответ: {% autoescape on %} {{context.answer.answer5|get_pos:forloop.counter0 }} {% endautoescape %}</p>
+
+    </div>
+    <hr style="color:blue;">
+{% endfor %}
+
+{% for item in context.quiz.answer6 %}
+        <div class="col-0">
+        <h5>Задание № 6</h5>
+        <h6>Ниже приведена программа, записанная на языке программирование "Python".</h6>
+        <div class="col-6">
+         <table class="table table-bordered">
+            <thead  class="thead-inverse">
+                <tr>
+                  <td scope="col"><h6>Python</h6></td>
+                </tr>
+                <tr>
+                    <td><h6>{{ item.quiz }}</h6> </td>
+                </tr>
+            </thead>
+         </table>
+        </div>
+
+   <h6>Было проведено 9 запусков программы, при которых в качестве значений переменных s и t вводились следующие пары чисел:</h6>
+   <h6>{{ item.variant }}</h6>
+   <h6>Сколько было запусков, при которых программа напечатала {{ item.YES_OR_NO }}</h6>
+    </div>
+
+    <p style="color:green; font-style: italic;">Ответ: {{ item.answer }}</p>
+        <p style="color:red;">Ваш ответ: {% autoescape on %} {{context.answer.answer6|get_pos:forloop.counter0 }} {% endautoescape %}</p>
+
+    <hr style="color:blue;">
+{% endfor %}
+
+
+{% for item in context.quiz.answer7 %}
+    <div class="container border border-primary">
+    <p>{{ item.type_quiz }}</p>
+    <p> {{ item.quiz }}  </p>
+    <p style="color:green; font-style: italic;">Ответ: {{ item.answer }}</p>
+        <p style="color:red;">Ваш ответ: {% autoescape on %} {{context.answer.answer7|get_pos:forloop.counter0 }} {% endautoescape %}</p>
+
+    </div>
+    <hr style="color:blue;">
+{% endfor %}
+
+
+{% for item in context.quiz.answer8 %}
+    <div class="container border border-primary">
+    <div class="container" >
+  <h5>Задание № 8</h5>
+  <h6>{{item.quiz}}</h6>
+  <div class="col-6">
+
+    <table class="table table-bordered">
+  <thead  class="thead-inverse">
+    <tr>
+      <td scope="col"><h6>Запрос</h6></td>
+      <td scope="col"><h6>Количество страниц(тыс.)</h6></td>
+    </tr>
+      <tbody>
+    <tr>
+
+      <td><h6>{{ item.quiz_p.0.0 }}</h6></td>
+      <td><h6>{{ item.quiz_p.0.1 }}</h6></td>
+    </tr>
+    <tr>
+      <td><h6>{{ item.quiz_p.1.0 }}</h6></td>
+      <td><h6>{{ item.quiz_p.1.1 }}</h6></td>
+    </tr>
+    <tr>
+      <td><h6>{{ item.quiz_p.2.0 }}</h6></td>
+      <td><h6>{{ item.quiz_p.2.1.0 }}</h6></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+</div>
+
+        <p style="color:green; font-style: italic;">Ответ: {{ item.answer }}</p>
+            <p style="color:red;">Ваш ответ: {% autoescape on %} {{context.answer.answer8|get_pos:forloop.counter0 }} {% endautoescape %}</p>
+
+    </div>
+    <hr style="color:blue;">
+{% endfor %}
+
+
+{% for item in context.quiz.answer9 %}
+    <div class="container border border-primary">
+    <p>{{ item.type_quiz }}</p>
+    <p> {{ item.quiz }}  </p>
+    <p style="color:green; font-style: italic;">Ответ: {{ item.answer }}</p>
+        <p style="color:red;">Ваш ответ: {% autoescape on %} {{context.answer.answer9|get_pos:forloop.counter0 }} {% endautoescape %}</p>
+
+    </div>
+    <hr style="color:blue;">
+{% endfor %}
+
+{% for item in context.quiz.answer10 %}
+    <div class="container border border-primary">
+    <p>{{ item.type_quiz }}</p>
+    <p> {{ item.quiz }}  </p>
+    <p style="color:green; font-style: italic;">Ответ: {{ item.answer }}</p>
+        <p style="color:red;">Ваш ответ: {% autoescape on %} {{context.answer.answer10|get_pos:forloop.counter0 }} {% endautoescape %}</p>
+
+    </div>
+    <hr style="color:blue;">
+{% endfor %}
+
+
+</div>
+Хотите отправить на электронную почту результаты на email {{ user.email }}?
+
+<form action="" method="post">
+        {% csrf_token %}
+    <button type="submit">отправить на email</button>
+
+</form>
+{% endautoescape %}
+
+{% endblock body %}

@@ -14,21 +14,32 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path,include
-from. import settings
+from django.urls import path, include
+from . import settings
 from django.conf.urls.static import static
+from rest_framework.authtoken.views import obtain_auth_token
 
 urlpatterns = [
+    path('auth/', include('djoser.urls')),
+    path('auth/token/', obtain_auth_token, name='token'),
+    path('_nested_admin/', include('nested_admin.urls')),
     path('admin/', admin.site.urls),
     path('ckeditor/', include('ckeditor_uploader.urls')),
-    path('auth/', include('djoser.urls')),
-    path('auth/', include('djoser.urls.jwt')),
-    path('auth/', include('djoser.urls.authtoken')),
 
-    path('',include('lk.urls')),
-    path('quiz/',include('quiz.urls')),
-    path('shop/',include('shop.urls'))
+    path('', include('lk.urls')),
+    path('user/', include('users.urls')),
+    path('autf/', include('users.urls')),
+    path('quiz/', include('quiz.urls')),
+    path('shop/', include('shop.urls')),
+    path('chat/',include('privatmessages.urls'))
 ]
 
+#path('__debug__/', include('debug_toolbar.urls')),
+
+# path('auth/', include('djoser.urls')),
+# path('auth/', include('djoser.urls.jwt')),
+# path('auth/', include('djoser.urls.authtoken')),
+
+
 if settings.DEBUG:
-    urlpatterns +=static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

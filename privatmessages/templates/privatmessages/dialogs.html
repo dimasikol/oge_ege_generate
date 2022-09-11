@@ -1,0 +1,34 @@
+{% extends 'quiz/base.html' %}
+
+{% block body %}
+dialogs
+<div class="container card-body col-md border border-primary shadow-lg p-3 mb-5 bg-body rounded">
+    {% load tz %}
+    {% if chats.count == 0 %}
+        <div class="panel panel-body"> Нет ни одного начатого диалога </div>
+    {% endif %}
+    {% for chat in chats %}
+    <hr>
+           <div class="row border-primary shadow-lg p-3 bg-body rounded">
+               <div class="col-1">
+           <p><img src="{{ chat.members.all.0.profiles.image_profile.url }}" alt="" width="90"></p>
+               </div>
+               <div class="col-10">
+                   <a href="{% url 'lk_for_look2' chat.members.all.0 %}"><h6>{{ chat.members.all.0.first_name }} {{ chat.members.all.0.last_name }}</h6></a>
+                   <hr>
+                   <div class="row">
+                   <div class="col-1">
+                   <img src="{{ chat.chat.last.author.profiles.image_profile.url }}" alt="" width="45">
+                   </div>
+               <div class="col-9">
+               <a href="{% url 'messages' chat.pk %}"><p>{{ chat.chat.last.message }}</p></a>
+               </div>
+           <div class="col-1">
+                {{ chat.chat.last.pub_date|date:'d.m.y H:i' }}
+               </div>
+                   </div>
+                   </div>
+               </div>
+    {% endfor %}
+</div>
+{% endblock body %}

@@ -1,0 +1,82 @@
+{% extends 'lk/base.html' %}
+
+{% block body %}
+{% load lk_tags %}
+<div class="row">
+<div class="col">
+<div class="card mb-3 shadow-lg p-3 mb-5 bg-body rounded">
+  <p align="right"><a href="{% url 'lk_friendships' user_name %}">Друзья</a></p>
+  <div class="shadow-lg p-3 mb-4 bg-body rounded">
+            {% for item in profile %}
+                 <p class="shadow-lg" align="center"><a href="{% url 'lk_for_look2' item.profile_friendshiop.user %}"><img src="{{ item.profile_friendshiop.image_profile.url }}" width="85">{{ item.profile_friendshiop.user.first_name }} {{ item.profile_friendshiop.user.last_name }}</a></p>
+            {% endfor %}
+  </div>
+</div>
+</div>
+
+
+
+{% if user_name != user.username %}
+<div class="col-auto">
+  <form method="POST" name="friendship">
+    {% csrf_token %}
+    {{ form_add_friend }}
+    {% if form_add_friend == "add" %}
+    <button type="submit" value="{{ user_name }}" name="add_friend">добавить в друзья</button>
+      {% elif form_add_friend == "del" %}
+    <button type="submit" value="удалить" name="del_friend">удалить из друзей</button>
+    {% endif %}
+  </form>
+  <button type="submit"><a href="{% url 'create_dialog' user_bio.id %}">написать сообщение</a></button>
+{% endif %}
+
+<div class="card mb-3 shadow-lg p-3 mb-5 bg-body rounded" style="max-width: 1340px;">
+  <div class="row g-4">
+    <div class="col-md-4 col-md-4 shadow-lg p-3 mb-4 bg-body rounded ">
+        <img src="{{ user_bio.profiles.image_profile.url }}" alt="фото в обработке">
+    </div>
+    <div class="col-md-4 shadow-lg p-3 mb-4 bg-body rounded">
+      <div class="card-body" style="text-align:center;">
+        <h4 class="card-title">{{ user_bio.first_name }} {{ user_bio.last_name }}</h4>
+        <hr>
+        <h4 class="card-text"><p><small class="text-muted">день рождения: </small>{{ user_bio.profiles.birthday }}</p></h4>
+        <h4 class="card-text" style="text-align:left;"><p><small class="text-muted">страна: </small>{{ user_bio.profiles.location }}</p></h4>
+        <h4 class="card-text" style="text-align:left;"><p><small class="text-muted">город: </small>{{ user_bio.profiles.city }}</p></h4>
+        <h4 class="card-text" style="text-align:left;"><p><small class="text-muted">зодиак: </small>{{ user_bio.profiles.zodiac }}</p></h4>
+        <h4 class="card-text" style="text-align:left;"><p><small class="text-muted">соцпортрет: </small>{{ user_bio.profiles.socionics_type }}</p></h4>
+        <p class="card-text"><small class="text-muted"></small></p>
+      </div>
+    </div>
+    <div class="col-md-4 shadow-lg p-3 mb-4 bg-body rounded">
+      <div class="card-body">
+        <h4>о себе</h4>
+        <hr>
+        <p>{{ user_bio.profiles.about }}</p>
+      </div>
+    </div>
+        <br>
+    <div class="shadow-lg p-3 mb-4 bg-body rounded">
+          {% for item in user_bio.profiles.albom.all|slice:"0:6" %}
+             <img src="{{ item.image.url }}" width="200">
+          {% endfor %}
+      <a href="{% url 'lk_albom' user_name %}">Открыть все</a>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="col">
+
+
+</div>
+
+</div>
+
+
+  <div class = "container card-body col-md-4 border border-primary shadow-lg p-3 mb-5 bg-body rounded">
+{% for item in context %}
+
+  <p class=""> дата выполнения:  {{ item.date_create }}, кол-во выполненных заданий <strong>{{ item.result_fin|str_to_list:1 }} из {{ item.result_fin|str_to_list:0 }} {{ item.result_fin.quiz_true }}</strong><a href="{% url 'lk_detail_quiz' user item.id %}">тест</a></p>
+{% endfor %}
+</div>
+{% endblock body %}
