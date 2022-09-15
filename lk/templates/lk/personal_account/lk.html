@@ -5,9 +5,11 @@
 <div class="row">
 <div class="col">
   <div class="card mb-3 shadow-lg p-3 mb-5 bg-body rounded">
-  <p align="right"><a href="{% url 'lk_friendships' user %}">Друзья</a></p>
-  <div class="shadow-lg p-3 mb-4 bg-body rounded">
-{% for item in profile %}
+  <p align="left">Мои подписки <a href="{% url 'lk_friendships' user %}">({% follower_count user.id %})</a></p>
+  <p align="left">Подписчики <a href="{% url 'lk_followings' user.id %}">{% following_count user.id %} </a></p>
+
+      <div class="shadow-lg p-3 mb-4 bg-body rounded">
+{% for item in profile|slice:"0:5" %}
     <a href="{% url 'lk_for_look2' item.profile_friendshiop.user %}"><img src="{{ item.profile_friendshiop.image_profile.url }}" width="105">
             <p>{{ item.profile_friendshiop.user.first_name }}
                {{ item.profile_friendshiop.user.last_name }}</p>

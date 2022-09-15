@@ -68,7 +68,18 @@ class Task1:
         return f'биты {self.bit} {self.type_bit} правильный ответ {self.words_answer}'
 
 class Task2:
-    pass
+    def __init__(self):
+        self.answer = random.randint(1,1400)
+        self.choice_type = random.choice(['or','and'])
+        self.choice_max_or_min_search = random.choice(['max','min'])
+        self.choice_not = random.choice([True,False])
+        self.write = ''
+    def write1(self):
+        if self.choice_type == 'and':
+            pass
+
+
+
 
 class Task3:
     pass

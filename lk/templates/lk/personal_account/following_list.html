@@ -1,0 +1,23 @@
+{% extends 'lk/base.html' %}
+
+{% block body %}
+<div class="container">
+<div class="row">
+{% for friend in friendship %}
+    <div class="col-3" align="center">
+    <div class="card" style="width: 18rem;">
+        <a href="{% url 'lk_for_look2' friend.user_name %}">
+            <img src="{{ friend.user_name.profiles.image_profile.url }}" class="card-img-top" alt="..."></a>
+    <div class="card-body">
+        <a href="{% url 'lk_for_look2' friend.user_name %}"><h5 class="card-title">{{ friend.user_name.first_name }}</h5>
+    <h5 class="card-title">{{ friend.user_name.last_name }}</h5></a>
+           <div >
+    </div>
+  </div>
+    </div>
+    </div>
+{% endfor %}
+
+    </div>
+    </div>
+{% endblock body %}

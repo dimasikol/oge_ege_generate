@@ -1,14 +1,27 @@
 <!DOCTYPE html>
 {% load static %}
+{% load lk_tags %}
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
 
     <title>{% block title %} {% endblock title %}</title>
-    {% block header %} {% include "lk/include/header.html" %} {% endblock header %}
+    {% block header %} {% include "lk/include/header.html" %}{% endblock header %}
 </head>
 <body>
+
+
     {% block nav %} {% include "lk/include/nav.html" %}  {% endblock nav %}
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li class=" {{ message.tags }} ">{{ message|safe }}
+            <a href="#" class="close">X</a>
+        </li>
+        {% endfor %}
+    </ul>
+    {% endif %}
 
     {% block body %}  {% endblock body %}
 </body>

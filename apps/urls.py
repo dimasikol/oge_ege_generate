@@ -31,10 +31,13 @@ urlpatterns = [
     path('autf/', include('users.urls')),
     path('quiz/', include('quiz.urls')),
     path('shop/', include('shop.urls')),
-    path('chat/',include('privatmessages.urls'))
+    path('chat/',include('privatmessages.urls')),
+
+
+    path('__debug__/', include('debug_toolbar.urls')),
+
 ]
 
-#path('__debug__/', include('debug_toolbar.urls')),
 
 # path('auth/', include('djoser.urls')),
 # path('auth/', include('djoser.urls.jwt')),

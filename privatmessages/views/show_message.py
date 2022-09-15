@@ -2,11 +2,14 @@ from django.db.models import Count
 from django.shortcuts import render,redirect
 from django.urls import reverse
 from django.views import View
+from rest_framework import permissions
 from ..models.message import Chat
 from ..form import MessageForm
+from rest_framework.views import APIView
 
 
-class CreateDialogView(View):
+class CreateDialogView(APIView):
+    permission_classes = [permissions.IsAuthenticated]
     def get(self,request,user_id):
         chats = Chat.objects.filter(members__in=[request.user.id,user_id],type=Chat.DIALOG).annotate(c=Count('members')).filter(c=2)
         if chats.count() == 0:
@@ -27,14 +30,18 @@ class DialogsView(View):
         return render(request, 'privatmessages/dialogs.html', {'user_profile': request.user, 'chats': chats})
 
 
-class MessagesView(View):
+class MessagesView(APIView):
+    permission_classes = [permissions.IsAuthenticated]
     def get(self,request,chat_id):
         try:
+
             chat = Chat.objects.get(id=chat_id)
+
             # if request.user in chat.members.all():
-            #      chat.message_set.filter(is_readed=False).exlude(author=request.user).update(is_readed=True)
+            #       chat.message_set.filter(is_readed=False).exlude(author=request.user).update(is_readed=True)
             # else:
-            #      chat = None
+            #       chat = None
+
         except:
             chat = None
         return render(request,'privatmessages/messages.html',{'user_profile':request.user,'chat':chat,'form':MessageForm()})

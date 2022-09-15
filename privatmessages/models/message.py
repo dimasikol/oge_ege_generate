@@ -21,3 +21,7 @@ class Message(models.Model):
     message = RichTextUploadingField()
     pub_date = models.DateTimeField(default=timezone.now(),blank=True)
     is_readed = models.BooleanField(default=False)
+
+
+    class META:
+        ordering = ['-pub_date','-is_readed',]

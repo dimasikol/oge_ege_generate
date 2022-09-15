@@ -6,9 +6,9 @@ from quiz.models.quiz_result_student import QuizResult
 from users.models import User, Profiles, Friendship
 from ..forms import lk_form
 from users.forms import RenameForm
-from django.core.mail import send_mail, EmailMessage
+from django.core.mail import EmailMessage
 from instrumenst.pdf.pdf_creater import create_pdf_at_html
-
+from django.contrib import messages
 
 class LkView(generic.View):
     """ Личный кабинет как видет его пользователь """
@@ -19,10 +19,7 @@ class LkView(generic.View):
             self.date = QuizResult.objects.filter(student=requests.user)
             self.profile = Friendship.objects.filter(user_name_id=User.objects.get(username=self.user))
             form_image_add = lk_form.AlbomsImageForm()
-            return render(requests, 'lk/personal_account/lk.html',
-                          {"user_bio": self.user,
-                           "profile": self.profile,
-                           "context": self.date, 'form_image_add': form_image_add})
+            return render(requests, 'lk/personal_account/lk.html',{"user_bio": self.user,"profile": self.profile,"context": self.date, 'form_image_add': form_image_add})
         return redirect('login')
 
     def post(self, requests):
@@ -35,11 +32,11 @@ class LkView(generic.View):
             for file in files_image:
                 date = lk_form.AlbomsImage.objects.create(profile_albomsimage=requests.user.profiles, image=file)
             date.save()
-            return render(requests, 'lk/personal_account/lk.html',
-                          {"user_bio": self.user, 'files_image': files_image, "profile": self.profile, })
+            messages.success(requests,'успешно')
+            return render(requests, 'lk/personal_account/lk.html',{"user_bio": self.user, 'files_image': files_image, "profile": self.profile, })
         files_image_add = lk_form.AlbomsImageForm()
-        return render(requests, 'lk/personal_account/lk.html',
-                      {"user_bio": self.user, 'form_image_add': files_image_add, "profile": self.profile})
+
+        return render(requests, 'lk/personal_account/lk.html',{"user_bio": self.user, 'form_image_add': files_image_add, "profile": self.profile})
 
 
 class LKDetailView(generic.View):
@@ -72,6 +69,7 @@ class LKDetailView(generic.View):
             for file in files_image:
                 date = lk_form.AlbomsImage.objects.create(profile_albomsimage=requests.user.profiles, image=file)
             date.save()
+            messages.success(requests, 'успешно')
             return render(requests, 'lk/personal_account/lk_for_look.html',
                           {"user_bio": self.user, 'files_image': files_image})
         if 'add_friend' in requests.POST or 'del_friend' in requests.POST:
@@ -80,13 +78,13 @@ class LKDetailView(generic.View):
                                                        profile_friendshiop=Profiles.objects.get(
                                                            user__username=user_name))
                 new_friend.save()
-                print('добавляем друга в базу дданных', requests.POST['add_friend'])
+                messages.success(requests, 'добавляем друга в базу дданных')
                 return redirect('home')
             else:
                 del_friend = Friendship.objects.get(user_name=User.objects.get(pk=requests.user.id),
                                                     profile_friendshiop=Profiles.objects.get(user__username=user_name))
                 del_friend.delete()
-                print(f'удаляем друга из базы данных {del_friend}')
+                messages.warning(requests, 'удаляем друга в базу дданных')
                 return redirect('home')
         files_image_add = lk_form.AlbomsImageForm()
         return render(requests, 'lk/personal_account/lk_for_look.html',
@@ -103,14 +101,19 @@ class LkDetailQuizView(generic.View):
     """ отправка писем через EmailMessage а так  же созданиие через функцию create_pdf_at_html пдф фалов"""
     def post(self, request, user_name, number):
         if request.method == 'POST':
-            from apps import settings
-            self.data=QuizResult.objects.get(id=number)
-            msg = render_to_string('lk/personal_account/lk_detail_quiz.html', {'user_name': user_name, 'number': number, 'user_bio': request.user, 'context': self.data})
-            file_path = str(create_pdf_at_html(f'1234', request.user))
-            mail = EmailMessage(subject='subject team',body=msg,from_email=settings.EMAIL_HOST_USER,to=[request.user.email])
-            mail.content_subtype = 'html'
-            mail.attach_file(file_path)
-            email_res = mail.send()
+            try:
+                from apps import settings
+                self.data=QuizResult.objects.get(id=number)
+                msg = render_to_string('lk/personal_account/lk_detail_quiz.html', {'user_name': user_name, 'number': number, 'user_bio': request.user, 'context': self.data})
+                file_path = str(create_pdf_at_html(f'1234', request.user))
+                mail = EmailMessage(subject='subject team',body=msg,from_email=settings.EMAIL_HOST_USER,to=[request.user.email])
+                mail.content_subtype = 'html'
+                mail.attach_file(file_path)
+                email_res = mail.send()
+                messages.success(request,f'письмо отправленно успешно по адресу {request.user.email}')
+            except:
+                messages.warning(request, 'не удалось отправить письмо, возможно вы не авторизованны или указали неверную почту')
+                return redirect('home')
             return redirect('home')
 
 

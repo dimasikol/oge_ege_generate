@@ -1,10 +1,11 @@
 {% extends 'lk/base.html' %}
 
 {% block body %}
-
-{% for item in albom.profiles.albom.all %}
-             <img src="{{ item.image.url }}" width="200">
+{% for item in albom %}
+            <div>
+            <img src="{{ item.image.url }}" width="200">
              {{ forloop.counter }}
+             </div>
 {% endfor %}
 
 
