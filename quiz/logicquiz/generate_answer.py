@@ -76,3 +76,11 @@ def change(date, chetnost, nechet=0):
     if nechet == 1:
         date[answer_index] -= 1
     return (date, date[answer_index])
+
+def int_or_null(num):
+    if isinstance(num,list):
+        num=num[0]
+    if str(num).isdigit():
+        return int(num)
+    else:
+        return 0

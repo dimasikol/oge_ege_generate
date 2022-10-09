@@ -17,7 +17,7 @@ class Chat(models.Model):
 
 class Message(models.Model):
     chat = models.ForeignKey(Chat,on_delete=models.DO_NOTHING,related_name='chat')
-    author = models.ForeignKey(User,on_delete=models.SET_NULL,related_name='author')
+    author = models.ForeignKey(User,on_delete=models.DO_NOTHING,related_name='author')
     message = RichTextUploadingField()
     pub_date = models.DateTimeField(default=timezone.now(),blank=True)
     is_readed = models.BooleanField(default=False)

@@ -5,6 +5,9 @@
 
         <li class="nav-item"><a class="nav-link" href="{% url 'show_all_people' %}">Все пользователи</a></li>
         <li class="nav-item"><a class="nav-link" href="{% url 'category' %}">shop</a></li>
+        {% if user.is_staff %}
+        <li class="nav-item"><a class="nav-link" href="{% url 'quiz_create_app' %}">quiz generate</a></li>
+        {%  endif %}
         <li class="nav-item"><a class="nav-link" href="{% url 'quiz_generate_type' %}">quiz generate</a></li>
     {% if request.user.is_authenticated %}
         <li class="nav-item"><a class="nav-link" href="{% url 'dialogs' %}">dialogs</a></li>

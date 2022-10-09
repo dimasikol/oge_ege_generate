@@ -6,6 +6,7 @@ from apps.settings import BASE_DIR
 with open(os.path.join(BASE_DIR, r'quiz/logicquiz/scratch_1.json'), 'r', encoding='UTF-8') as file:
     date = json.load(file)
 
+
 class Task1:
     Task_num=0
     def __init__(self):
@@ -49,7 +50,7 @@ class Task1:
 
     def write2(self):
         self.write_answer = date['one']['3text']
-        self.write_answer3 = f'{self.write_answer[:44]} {self.random_num[0]}{self.write_answer[45:79]} {self.random_num[1]} {self.write_answer[80:108]} {self.random_num[2]} {self.write_answer[109:182]} {self.bit} {self.type_bit} {self.write_answer[182:188]}\n{self.write_answer[189:232]} {self.bit_answer}.\n{self.write_answer[236:]}'
+        self.write_answer3 = f'{self.write_answer[:44]} {self.random_num[0]}{self.write_answer[45:79]} {self.random_num[1]} {self.write_answer[80:108]} {self.random_num[2]} {self.write_answer[109:182]} {self.bit} {self.type_bit} {self.write_answer[182:188]}\n{self.write_answer[189:232]} {self.bit_answer}{self.write_answer[235:]}'
         self.answer_2 = self.schet * self.bit * self.random_num[0] * self.random_num[1] * self.random_num[2]
         if isinstance(self.answer_2,float):
             self.answer_2 = round(self.answer_2, 2)
@@ -67,22 +68,51 @@ class Task1:
     def __str__(self):
         return f'биты {self.bit} {self.type_bit} правильный ответ {self.words_answer}'
 
+
 class Task2:
     def __init__(self):
+        self.dicts = {"znak":[' > ', ' < ', ' >= ', ' <= '], "and_or":[' И ', ' ИЛИ '], "ne":['НЕ ', '']}
         self.answer = random.randint(1,1400)
         self.choice_type = random.choice(['or','and'])
         self.choice_max_or_min_search = random.choice(['max','min'])
-        self.choice_not = random.choice([True,False])
-        self.write = ''
+        self.znak_0 = random.choice(['<',"<="])
+        self.znak_1 = random.choice(['>',">="])
+
     def write1(self):
         if self.choice_type == 'and':
+
+
             pass
 
 
-
-
 class Task3:
-    pass
+    def __init__(self):
+        self.simvol_shuffle_1 = random.choice('+!@#$%^*&-0?')
+        self.simvol_shuffle_2 = random.choice('+!@#$%^*&-1?'.replace(self.simvol_shuffle_1, ''))
+        self.date = date['there']
+        self.question = self.date['keys']
+        self.question=list(map(lambda x: x.replace('0',self.simvol_shuffle_1).replace('1',self.simvol_shuffle_2),random.choice(list(self.question.values()))))
+        random.shuffle(self.question)
+        self.alfa = date['alfa_ru']
+        self.answer = random.choice(date['word'])
+
+    def write(self):
+        self.num = 0
+        self.quiz_res={}
+        if len(self.answer)>16:
+            self.question = self.date['keys']['5']
+            random.shuffle(self.question)
+        for item in set(self.answer):
+            self.alfa = self.alfa.replace(item,'')
+            self.quiz_res[item] = self.question[self.num]
+            self.num += 1
+        for i in range(3,6):
+             self.quiz_res[self.alfa[i]]= bin(i)[2:].replace('0',self.simvol_shuffle_1).replace('1',self.simvol_shuffle_2)
+             self.num += 1
+             self.alfa = self.alfa.replace(self.alfa[0], '')
+        self.quiz_res_write = ''.join([self.quiz_res[i] for i in self.answer])
+        return {'quiz': self.quiz_res,'quiz_responce':self.quiz_res_write,'answer':self.answer}
+
 
 class Task4:
     def __init__(self):
@@ -104,7 +134,7 @@ class Task4:
                         self.date[i][j] = 'Ø'
                     else:
                         self.date[j][i] = self.date[i][j]
-        self.date[1][6] += 15
+        self.date[1][6] += 25
         self.answer_date = []
         for k in range(2,6):
 
@@ -116,12 +146,15 @@ class Task4:
             except ValueError:
                 print('error Value')
             self.answer_min=min(self.answer_date)
+
+        self.date[6][1] += 25
         return self.date,self.answer_min
 
 
     def write(self):
         self.table,self.answer = self.show_table
         return {"quiz":self.table,"answer":self.answer}
+
 
 class Task5:
     Task_num = Task1.Task_num
@@ -145,10 +178,10 @@ class Task5:
 
     def write(self):
         #self.quiz= self.text['text']+self.type_znaks[0]+" "+str(self.nums[0])+'<br>'+self.type_znaks[1]+str(self.nums[1])+self.text['text1']
-        self.quiz= f'{self.text["text"]} {self.date["keys"][self.type_znaks[0]]}' \
-                   f' {self.nums[0]}<br>{self.date["keys"][self.type_znaks[1]]} ' \
+        self.quiz= f'{self.text["text"]} 1){self.date["keys"][self.type_znaks[0]]}' \
+                   f' {self.nums[0]}<br>2){self.date["keys"][self.type_znaks[1]]} ' \
                    f'b {self.text["text1"]}{self.text["text2"]} {self.date["keys"][self.type_znaks[0]]} {self.nums[0]} ' \
-                   f'{self.text["text3"]} {self.date["keys"][self.type_znaks[1]]} {self.nums[1]} {self.text["text4"]} {"".join(list(map(str,self.spisok)))}' \
+                   f'{self.text["text3"]} {self.date["keys"][self.type_znaks[1]]} b {self.text["text4"]} {"".join(list(map(str,self.spisok)))}' \
                    f' {self.text["text5"]} {self.start_num} в {self.create_quiz()} {self.text["text6"]}'
 
         return {"quiz":self.quiz,"variant":self.variant,"answer":self.nums,"type_quiz":{Task5.Task_num}}
@@ -210,6 +243,7 @@ class Task7:
 
 class Task8:
     Task_num=Task7.Task_num
+
     def __init__(self):
         Task8.Task_num+=1
         self.date = date['eight']
@@ -238,6 +272,20 @@ class Task8:
         self.quiz,self.answer_total,self.quiz3_anwer = self.func_random_choice(self.choice)
         self.write_quiz2 =f'{self.text["type2"]} "{self.quiz3_anwer}" {self.text["type3"]}'
         return {"quiz": self.write_quiz,"answer":self.answer_total,"quiz1":self.write_quiz2, "quiz_p": self.quiz, 'type_quiz': f'{Task8.Task_num}.Задание №8'}
+
+
+class Task9:
+    random_num=0
+    def __init__(self):
+        self.answer =[28,12,28,27,64,17,56,22,6,23,19,24,13]
+        self.random_num = Task9.random_num
+        self.image = r'/media/media/oge/nine/'+str(self.random_num)+'.jpg'
+        Task9.random_num += 1
+        if Task9.random_num == len(self.answer)+1:
+            Task9.random_num=0
+    def write(self):
+
+        return {'image':self.image,'answer':self.answer[self.random_num],"id":self.random_num}
 
 
 class Task10:

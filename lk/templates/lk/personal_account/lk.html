@@ -6,7 +6,9 @@
 <div class="col">
   <div class="card mb-3 shadow-lg p-3 mb-5 bg-body rounded">
   <p align="left">Мои подписки <a href="{% url 'lk_friendships' user %}">({% follower_count user.id %})</a></p>
-  <p align="left">Подписчики <a href="{% url 'lk_followings' user.id %}">{% following_count user.id %} </a></p>
+  <p align="left">Подписчики <a href="{% url 'lk_followings' user %}">{% following_count user %} </a></p>
+
+
 
       <div class="shadow-lg p-3 mb-4 bg-body rounded">
 {% for item in profile|slice:"0:5" %}

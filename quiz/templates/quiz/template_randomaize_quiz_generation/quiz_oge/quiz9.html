@@ -1,0 +1,12 @@
+
+
+{% for item in answer9 %}
+<div class="container card-body col-md-9 border border-primary shadow-lg p-3 mb-5 bg-body rounded">
+<h6>Задание № 9</h6>
+<p>На рисунке — схема дорог, связывающих города А, Б, В, Г, Д, Е, Ж, З, И. По каждой дороге можно двигаться только в одном направлении, указанном стрелкой.{{ item.id }} Сколько существует различных путей из города А в город И </p>
+<img src="{{ item.image }}" alt=" не удалось загрузить" width="400">
+
+<h5>Ответ:<input type="text" name="answer9" width="200" height="30"></h5>
+
+</div>
+{% endfor %}

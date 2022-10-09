@@ -21,6 +21,7 @@ class Profiles(models.Model):
     city = models.CharField(max_length=15,blank=True,default='')
     zodiac = models.CharField(max_length=25,choices=DATA['zodiac'], default='',blank=True)
     socionics_type = models.CharField(max_length=25,choices=DATA['socionics_type'],default='',blank=True)
+    show_profile = models.BooleanField(default=True,blank=True)
     def __str__(self):
         return  f'{self.id} {self.user}'
 

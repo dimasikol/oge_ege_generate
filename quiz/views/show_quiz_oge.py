@@ -3,16 +3,19 @@ from django.views import generic
 from django.http import HttpResponseRedirect
 from ..logicquiz import check_test
 from ..models.quiz_result_student import QuizResult
-import random
-import time
+
+
 class QuizView(generic.View):
     def get(self,request,**kwargs):
-        return render(request,"quiz/template_randomaize_quiz_generation/quiz/quiz_choice.html")
+        return render(request,"quiz/template_randomaize_quiz_generation/quiz_oge/quiz_choice.html")
+
 
 class ShowQuizView(generic.View):
 
     def get(self,request,**kwargs):
         global context
+        if sum(list(map(lambda x: int(x) if str(x).isdigit() else 0,list(request.GET.values()))))==0:
+            return redirect('quiz_generate_oge')
         context = check_test.context(request.GET)
         return render(request,"quiz/template_randomaize_quiz_generation/base.html",context=context)
 
@@ -32,7 +35,7 @@ class ShowQuizView(generic.View):
                     results_fin[1]+=sum(date)
             base_date=QuizResult(answer=dict(request.POST),student=request.user,question_number="answer1",question_type='oge',quiz = context,result=answer_all,result_fin=results_fin)
             base_date.save()
-            return render(request,"quiz/template_randomaize_quiz_generation/quiz/quiz_result.html")
+            return render(request,"quiz/template_randomaize_quiz_generation/quiz_oge/quiz_result.html")
         return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 

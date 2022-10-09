@@ -29,7 +29,23 @@
 {% for item in context.quiz.answer3 %}
     <div class="container border border-primary">
     <p>Задание № 3</p>
-    <p> {{ item.quiz }}  </p>
+    <p>Валя шифрует русские слова (последовательности букв), записывая вместо каждой буквы её код:</p>
+        <table class="table table-striped" border="2" >
+        <tr align="center">
+        {% for k,v in item.quiz.items %}
+
+                <th align="center"> {{ k }}</th>
+        {% endfor %}
+        </tr>
+        <tr align="center">
+        {% for k,v in item.quiz.items %}
+        <th align="center">{{ v }}</th>
+        {% endfor %}
+        </tr>
+    </table>
+
+    <h6>Расшифруйте сообщение: {{ item.quiz_responce }}</h6>
+    <p>*Запишите в ответе расшифрованное сообщение, прописными буквами.</p>
     <p style="color:green; font-style: italic;">Ответ: {{ item.answer }}</p>
     <p style="color:red;">Ваш ответ: {% autoescape on %} {{context.answer.answer3|get_pos:forloop.counter0 }} {% endautoescape %}</p>
 
@@ -164,8 +180,11 @@
 
 {% for item in context.quiz.answer9 %}
     <div class="container border border-primary">
-    <p>{{ item.type_quiz }}</p>
-    <p> {{ item.quiz }}  </p>
+    <p>Задание №9</p>
+        <p>На рисунке — схема дорог, связывающих города А, Б, В, Г, Д, Е, Ж, З, И. По каждой дороге можно двигаться только в одном направлении, указанном стрелкой. Сколько существует различных путей из города А в город И, проходящих через город В?</p>
+
+        <img src="{{ item.image }}"  width="300" alt="обратитесь к администратору" align="center">
+
     <p style="color:green; font-style: italic;">Ответ: {{ item.answer }}</p>
         <p style="color:red;">Ваш ответ: {% autoescape on %} {{context.answer.answer9|get_pos:forloop.counter0 }} {% endautoescape %}</p>
 

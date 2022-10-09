@@ -5,6 +5,9 @@
 {% include "lk/include/header.html" %}
 {% endblock header %}
 {% block body %}
+{{ user }}
+{{ chat.members.all }}
+<!--{% if user in chat.members.all %}-->
 <div class="container col border border-primary shadow-lg p-3 mb-5 bg-body rounded" style="height:700px; border: 1px solid; overflow: auto;">
     {% for message in chat.chat.all %}
     <div class="row border border-primary shadow-lg" style="">
@@ -23,4 +26,5 @@
         </form>
     </div>
 </div>
+<!--{% endif %}-->
 {% endblock body %}

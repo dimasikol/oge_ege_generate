@@ -11,7 +11,7 @@ urlpatterns = [
     path('lk/<str:user_name>/quiz/<int:number>/', LkDetailQuizView.as_view(), name='lk_detail_quiz'),
     path('lk/follower/<str:user_name>/', FollowerFriendshipView.as_view(), name='lk_friendships'),
     path('lk/following/<str:user_name>/',FolowingFriendshipView.as_view(),name='lk_followings'),
-
     path('lk/albom/<str:user_name>',ImagesView.as_view(),name='lk_albom'),
+
 
 ]

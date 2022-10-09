@@ -1,0 +1,29 @@
+
+
+{% for item in answer3 %}
+<div class="container card-body col-md-9 border border-primary shadow-lg p-3 mb-5 bg-body rounded">
+
+<h5>Задание № 3</h5>
+
+<h6>Валя шифрует русские слова (последовательности букв), записывая вместо каждой буквы её код:</h6>
+    <table class="table table-striped" border="2" >
+        <tr align="center">
+        {% for k,v in item.quiz.items %}
+
+                <th align="center"> {{ k }}</th>
+        {% endfor %}
+        </tr>
+        <tr align="center">
+        {% for k,v in item.quiz.items %}
+        <th align="center">{{ v }}</th>
+        {% endfor %}
+        </tr>
+    </table>
+
+    <h5>Расшифруйте сообщение: {{ item.quiz_responce }}</h5>
+    <h6>*Запишите в ответе расшифрованное сообщение, прописными буквами.</h6>
+
+<h5>Ответ:<input type="text" name="answer3" width="200" height="30"></h5>
+
+</div>
+{% endfor %}

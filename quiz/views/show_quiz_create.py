@@ -28,9 +28,6 @@ class ShowQuizView(LoginRequiredMixin,View):
             date_answer = [''.join([item.answer_true for item in date[i].question_true.all()]) for i in range(len(date))] # список правильных ответов
             result = [sum([i==k for i,k in zip(user_answer,date_answer)]),len(date_answer)] #
 
-            print(result)
-            print(date_answer)
-            print(user_answer)
         return redirect('/quiz/quiz_category/computer-science/test5/')
 
 

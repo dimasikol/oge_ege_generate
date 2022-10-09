@@ -46,19 +46,31 @@ class LKDetailView(generic.View):
         self.profile = Friendship.objects.filter(user_name_id=User.objects.get(username=user_name))
         self.user_request = request.user
         self.profile_request = Friendship.objects.filter(user_name=self.user_request)
+        self.profile_date = Profiles.objects.get(user__username=request.user)
         form_image_add = lk_form.AlbomsImageForm()
         if Profiles.objects.get(user__username=user_name).id in list(
                 map(lambda x: x[0], self.profile_request.values_list('profile_friendshiop'))):
             form_add_friend = 'del'
         else:
             form_add_friend = 'add'
-        return render(request, 'lk/personal_account/lk_for_look.html',
-                      {"user_bio": self.user,
+        if self.profile_date.id in list(map(lambda x: x[0], self.profile.values_list('profile_friendshiop'))) or  Profiles.objects.get(user__username=user_name).show_profile:  # проверка есть ли пользователь в друзьях
+
+
+            return render(request, 'lk/personal_account/lk_for_look.html',
+                          {"user_bio": self.user,
+                           "profile": self.profile,
+                           "context": self.date,
+                           "form_image_add": form_image_add,
+                           "form_add_friend": form_add_friend,
+                           'user_name': user_name})
+        return  render(request, 'lk/personal_account/lk_for_look_block.html',{"user_bio": self.user,
                        "profile": self.profile,
                        "context": self.date,
                        "form_image_add": form_image_add,
                        "form_add_friend": form_add_friend,
                        'user_name': user_name})
+
+
 
     def post(self, requests, user_name):
         form_image_add = lk_form.AlbomsImageForm(requests.POST or None, requests.FILES or None)
@@ -147,6 +159,11 @@ class LkViewEdit(generic.View):
                 profile_user.about = form_edit.cleaned_data['about']
                 profile_user.zodiac = form_edit.cleaned_data['zodiac']
                 profile_user.socionics_type = form_edit.cleaned_data['socionics_type']
+                print()
+                if form_edit.cleaned_data['show_profile']:
+                    profile_user.show_profile = True
+                else:
+                    profile_user.show_profile = False
                 user.save()
                 profile_user.save()
                 return redirect('home')

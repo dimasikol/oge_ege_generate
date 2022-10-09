@@ -44,6 +44,8 @@
             <h4 class="card-text"><input class="form-control" id="city" type="text" name="city" value="{{ user_bio.profiles.city }}"/></h4>
             <label for="birthday">дата рождения</label>
             <h4 class="card-text"><input id="birthday" type="date" name="birthday" class="form-control" value="{{ user_bio.profiles.birthday|date:'Y-m-d' }}"></h4>
+          <label for="show_profile" >show_profile</label>
+          <h5 class="card-text">Открытый профиль:<input class="checkbox" id="show_profile" type="checkbox" name="show_profile" checked="{% if  user_bio.profiles.show_profile == 'True' %}checked{% else %}unchecked{% endif %}" value="{% if  user_bio.profiles.show_profile == True %}True{% else %}False{% endif %}">  </h5>
 
 <label for="zodiac">знак зодиака: </label>
     <select class="form-select" name="zodiac" id="zodiac">
