@@ -1,7 +1,5 @@
-import json
-import random
+import json, random, os
 from . import generate_answer
-import os
 from apps.settings import BASE_DIR
 with open(os.path.join(BASE_DIR, r'quiz/logicquiz/scratch_1.json'), 'r', encoding='UTF-8') as file:
     date = json.load(file)

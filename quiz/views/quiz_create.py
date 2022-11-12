@@ -13,7 +13,6 @@ class QuizCategoryView(mixins.ListModelMixin,mixins.CreateModelMixin,mixins.Upda
         self.date = QuizCategoryView.queryset.objects.all()
         self.form_create = forms_quiz_create.QuizCategoryForms()
         self.form_update = ''
-
         return render(request,'quiz/quiz_create/show_quiz_category.html',{'category_quiz':self.date, 'form_create':forms_quiz_create})
 
     def create(self, request, *args, **kwargs):

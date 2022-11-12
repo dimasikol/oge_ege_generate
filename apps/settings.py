@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-8re*dlr1bqadk$21irkyblpcod31#)!gqcne@j@35e5z*i9h_%
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
+CONTEXT = {}
 ALLOWED_HOSTS = []
 
 
@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'djoser',
     'crispy_forms',
     'crispy_bootstrap5',
+    'channels',
 
     'lk',
     'users',
@@ -52,11 +53,18 @@ INSTALLED_APPS = [
     'quiz',
     'shop',
     'privatmessages',
+    'chanelmessages',
+
 ]
 
 #    'debug_toolbar',
 
-
+# CHANNEL_LAYERS = {
+#     'default': {
+#         'BACKEND': 'asgiref.inmemory.ChannelLayer',
+#         'ROUTING': 'apps.channel_routing',
+#     },
+# }
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -91,8 +99,16 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'apps.wsgi.application'
+ASGI_APPLICATION = "apps.asgi.application"
 
-
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [('127.0.0.1', 6379)],
+        },
+    },
+}
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 

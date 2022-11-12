@@ -2,18 +2,7 @@
 
 {% block body %}
 {% load lk_tags %}
-<div class="row">
-<div class="col">
-<div class="card mb-3 shadow-lg p-3 mb-5 bg-body rounded">
-  <p align="right">{{ user_name }} подписки <a href="{% url 'lk_friendships' user_name %}"> ({% follower_count user_name %})</a></p>
-  <p align="left">Подписчики <a href="{% url 'lk_followings' user_name %}">{% following_count user_name %} </a></p>
-  <div class="shadow-lg p-3 mb-4 bg-body rounded">
-            {% for item in profile %}
-                 <p class="shadow-lg" align="center"><a href="{% url 'lk_for_look2' item.profile_friendshiop.user %}"><img src="{{ item.profile_friendshiop.image_profile.url }}" width="85">{{ item.profile_friendshiop.user.first_name }} {{ item.profile_friendshiop.user.last_name }}</a></p>
-            {% endfor %}
-  </div>
-</div>
-</div>
+
 
 
 
@@ -59,6 +48,6 @@
 
 </div>
 
-</div>
+
 
 {% endblock %}

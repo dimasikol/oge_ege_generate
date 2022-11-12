@@ -7,7 +7,6 @@ from django.dispatch import receiver
 from django import forms
 
 
-
 class Profiles(models.Model):
     DATA={
         'zodiac':(('',""),('Овен','Овен'), ('Телец','Телец'), ('Близнецы','Близнецы'), ('Рак','Рак'), ('Лев','Лев'), ('Дева','Дева'), ('Весы','Весы'), ('Скорпион','Скорпион'), ('Стрелец','Стрелец'), ('Козерог','Козерог'), ('Водолей','Водолей'), ('Рыбы','Рыбы')),
@@ -22,6 +21,7 @@ class Profiles(models.Model):
     zodiac = models.CharField(max_length=25,choices=DATA['zodiac'], default='',blank=True)
     socionics_type = models.CharField(max_length=25,choices=DATA['socionics_type'],default='',blank=True)
     show_profile = models.BooleanField(default=True,blank=True)
+    status = models.DateTimeField(default=datetime.datetime.now(),blank=True)
     def __str__(self):
         return  f'{self.id} {self.user}'
 

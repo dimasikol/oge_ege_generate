@@ -5,11 +5,11 @@
 <div class="row">
 <div class="col">
 <div class="card mb-3 shadow-lg p-3 mb-5 bg-body rounded">
-  <p align="right">{{ user_name }} подписки <a href="{% url 'lk_friendships' user_name %}"> ({% follower_count user_name %})</a></p>
-  <p align="left">Подписчики <a href="{% url 'lk_followings' user_name %}">{% following_count user_name %} </a></p>
+  <p align="left">Подписчики<a href="{% url 'lk:lk_followings' user_name %}">({% following_count user_name %})</a></p>
+  <p align="left">Подписки<a href="{% url 'lk:lk_friendships' user_name %}">({% follower_count user_name %})</a></p>
   <div class="shadow-lg p-3 mb-4 bg-body rounded">
             {% for item in profile %}
-                 <p class="shadow-lg" align="center"><a href="{% url 'lk_for_look2' item.profile_friendshiop.user %}"><img src="{{ item.profile_friendshiop.image_profile.url }}" width="85">{{ item.profile_friendshiop.user.first_name }} {{ item.profile_friendshiop.user.last_name }}</a></p>
+                 <p class="shadow-lg" align="center"><a href="{% url 'lk:lk_for_look2' item.profile_friendshiop.user %}"><img src="{{ item.profile_friendshiop.image_profile.url }}" width="85">{{ item.profile_friendshiop.user.first_name }} {{ item.profile_friendshiop.user.last_name }}</a></p>
             {% endfor %}
   </div>
 </div>
@@ -18,9 +18,9 @@
 
 {% if user_name != user.username %}
 <div class="col-auto">
+  {{ status }}
   <form method="POST" name="friendship">
     {% csrf_token %}
-    {{ form_add_friend }}
     {% if form_add_friend == "add" %}
     <button type="submit" value="{{ user_name }}" name="add_friend">добавить в друзья</button>
       {% elif form_add_friend == "del" %}
@@ -59,7 +59,7 @@
           {% for item in user_bio.profiles.albom.all|slice:"0:6" %}
              <img src="{{ item.image.url }}" width="200">
           {% endfor %}
-      <a href="{% url 'lk_albom' user_name %}">Открыть все</a>
+      <a href="{% url 'lk:lk_albom' user_name %}">Открыть все</a>
     </div>
   </div>
 </div>
@@ -76,7 +76,7 @@
   <div class = "container card-body col-md-4 border border-primary shadow-lg p-3 mb-5 bg-body rounded">
 {% for item in context %}
 
-  <p class=""> дата выполнения:  {{ item.date_create }}, кол-во выполненных заданий <strong>{{ item.result_fin|str_to_list:1 }} из {{ item.result_fin|str_to_list:0 }} {{ item.result_fin.quiz_true }}</strong><a href="{% url 'lk_detail_quiz' user item.id %}">тест</a></p>
+  <p class=""> дата выполнения:  {{ item.date_create }}, кол-во выполненных заданий <strong>{{ item.result_fin|str_to_list:1 }} из {{ item.result_fin|str_to_list:0 }} {{ item.result_fin.quiz_true }}</strong><a href="{% url 'lk:lk_detail_quiz' user item.id %}">тест</a></p>
 {% endfor %}
 </div>
 {% endblock body %}

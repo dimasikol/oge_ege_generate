@@ -22,12 +22,10 @@ class ShowQuizView(LoginRequiredMixin,View):
         return render(requests,'quiz/quiz_create/show_quiz.html',{"quiz":date})
 
     def post(self,requests,name,quiz,**kwargs):
+        date = quiz_create.QuizCategory.objects.all()
         if requests.method=='POST':
-            date = quiz_create.QuizCreate.objects.filter(category_quiz__slug_quiz=quiz)
-            user_answer = [''.join(item.split(',')) if item.find(',')!=-1 else item for item in requests.POST.getlist('answer')] # список ответов пользователя
-            date_answer = [''.join([item.answer_true for item in date[i].question_true.all()]) for i in range(len(date))] # список правильных ответов
-            result = [sum([i==k for i,k in zip(user_answer,date_answer)]),len(date_answer)] #
+            print(requests.post)
 
-        return redirect('/quiz/quiz_category/computer-science/test5/')
 
+        return render(requests, 'quiz/quiz_create/show_quiz_category_filter.html', {"quizs": date})
 

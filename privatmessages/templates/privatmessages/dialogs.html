@@ -14,7 +14,7 @@ dialogs
            <p><img src="{{ chat.members.all.0.profiles.image_profile.url }}" alt="" width="90"></p>
                </div>
                <div class="col-10">
-                   <a href="{% url 'lk_for_look2' chat.members.all.0 %}"><h6>{{ chat.members.all.0.first_name }} {{ chat.members.all.0.last_name }}</h6></a>
+                   <a href="{% url 'lk:lk_for_look2' chat.members.all.0 %}"><h6>{{ chat.members.all.0.first_name }} {{ chat.members.all.0.last_name }}</h6></a>
                    <hr>
                    <div class="row">
                    <div class="col-1">

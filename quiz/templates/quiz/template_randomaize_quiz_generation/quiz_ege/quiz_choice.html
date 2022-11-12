@@ -1,0 +1,39 @@
+{% extends "quiz/base.html" %}
+{% block body %}
+<div class="container">
+    <div class="col-0">
+<form action="{% url 'quiz:quiz_generate_ege' %}" method="post">
+    {% csrf_token %}
+<p>Задание №1) <input type="number" min ="0" max="10" placeholder="0" name = "quiz1" value="0" disabled="disabled"></p>
+<p>Задание №2) <input type="number" min ="0" max="10" placeholder="0" name = "quiz2" value="0" disabled="disabled"></p>
+<p>Задание №3) <input type="number" min ="0" max="10" placeholder="0" name = "quiz3" value="0" disabled="disabled"></p>
+<p>Задание №4) <input type="number" min ="0" max="10" placeholder="0" name = "quiz4" value="0" disabled="disabled"></p>
+<p>Задание №5) <input type="number" min ="0" max="10" placeholder="0" name = "quiz5" value="0" disabled="disabled"></p>
+<p>Задание №6) <input type="number" min ="0" max="10" placeholder="0" name = "quiz6" value="0" disabled="disabled"></p>
+<p>Задание №7) <input type="number" min ="0" max="10" placeholder="0" name = "quiz7" value="0"></p>
+<p>Задание №8) <input type="number" min ="0" max="10" placeholder="0" name = "quiz8" value="0" disabled="disabled"></p>
+<p>Задание №9) <input type="number" min ="0" max="10" placeholder="0" name = "quiz9" value="0" disabled="disabled"></p>
+<p>Задание №10) <input type="number" min ="0" max="10" placeholder="0" name = "quiz10" value="0" disabled="disabled"></p>
+<p>Задание №11) <input type="number" min ="0" max="10" placeholder="0" name = "quiz11" value="0" disabled="disabled"></p>
+<p>Задание №12) <input type="number" min ="0" max="10" placeholder="0" name = "quiz12" value="0" disabled="disabled"></p>
+<p>Задание №13) <input type="number" min ="0" max="10" placeholder="0" name = "quiz13" value="0" disabled="disabled"></p>
+<p>Задание №14) <input type="number" min ="0" max="10" placeholder="0" name = "quiz14" value="0" disabled="disabled"></p>
+<p>Задание №15) <input type="number" min ="0" max="10" placeholder="0" name = "quiz15" value="0" disabled="disabled"></p>
+<p>Задание №16) <input type="number" min ="0" max="10" placeholder="0" name = "quiz16" value="0" disabled="disabled"></p>
+<p>Задание №17) <input type="number" min ="0" max="10" placeholder="0" name = "quiz17" value="0" disabled="disabled"></p>
+<p>Задание №18) <input type="number" min ="0" max="10" placeholder="0" name = "quiz18" value="0" disabled="disabled"></p>
+<p>Задание №19) <input type="number" min ="0" max="10" placeholder="0" name = "quiz19" value="0" disabled="disabled"></p>
+<p>Задание №20) <input type="number" min ="0" max="10" placeholder="0" name = "quiz20" value="0" disabled="disabled"></p>
+<p>Задание №21) <input type="number" min ="0" max="10" placeholder="0" name = "quiz21" value="0" disabled="disabled"></p>
+<p>Задание №22) <input type="number" min ="0" max="10" placeholder="0" name = "quiz22" value="0" disabled="disabled"></p>
+<p>Задание №23) <input type="number" min ="0" max="10" placeholder="0" name = "quiz23" value="0" disabled="disabled"></p>
+<p>Задание №24) <input type="number" min ="0" max="10" placeholder="0" name = "quiz24" value="0" disabled="disabled"></p>
+<p>Задание №25) <input type="number" min ="0" max="10" placeholder="0" name = "quiz25" value="0" disabled="disabled"></p>
+<p>Задание №26) <input type="number" min ="0" max="10" placeholder="0" name = "quiz26" value="0" disabled="disabled"></p>
+<p>Задание №27) <input type="number" min ="0" max="10" placeholder="0" name = "quiz27" value="0" disabled="disabled"></p>
+    <input type="submit">
+</form>
+
+</div>
+</div>
+    {% endblock body %}

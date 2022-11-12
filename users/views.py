@@ -25,7 +25,7 @@ def login_view(requests,*args,**kwargs):
     context={}
     user = requests.user
     if user.is_authenticated:
-        return redirect('home')
+        return redirect('lk:home')
     if requests.POST:
         form = AccountAuthenticationForm(requests.POST)
         if form.is_valid():
@@ -37,7 +37,7 @@ def login_view(requests,*args,**kwargs):
                 destination = get_redirect_if_exists(requests)
                 if destination:
                     return redirect(destination)
-                return redirect('home')
+                return redirect('lk:home')
         else:
             context['login_form'] = form
     return render(requests,template_name='registration/login.html',context=context)
@@ -54,7 +54,7 @@ def logoutview(requests):
     if requests.user.is_authenticated:
         print(requests.user)
         logout(requests)
-    return redirect('home')
+    return redirect('lk:home')
 
 
 class ShowAllPeople(APIView):
@@ -62,5 +62,4 @@ class ShowAllPeople(APIView):
     permission_classes = [permissions.IsAuthenticated]
     def get(self, request):
         users = User.objects.all()
-        return render(request, 'user_templates/show_all_users.html',
-                      {'users': users})
+        return render(request, 'user_templates/show_all_users.html', {'users': users})

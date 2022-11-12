@@ -1,3 +1,5 @@
+import datetime
+
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, redirect
 from django.template.loader import render_to_string
@@ -19,6 +21,9 @@ class LkView(generic.View):
             self.date = QuizResult.objects.filter(student=requests.user)
             self.profile = Friendship.objects.filter(user_name_id=User.objects.get(username=self.user))
             form_image_add = lk_form.AlbomsImageForm()
+            self.status_user = Profiles.objects.get(user=self.user)
+            self.status_user.status = datetime.datetime.now()
+            self.status_user.save()
             return render(requests, 'lk/personal_account/lk.html',{"user_bio": self.user,"profile": self.profile,"context": self.date, 'form_image_add': form_image_add})
         return redirect('login')
 
@@ -47,6 +52,9 @@ class LKDetailView(generic.View):
         self.user_request = request.user
         self.profile_request = Friendship.objects.filter(user_name=self.user_request)
         self.profile_date = Profiles.objects.get(user__username=request.user)
+
+        self.status = self.user.profiles.status if self.user.profiles.status.timetuple()<(datetime.datetime.now()-datetime.timedelta(seconds=600)).timetuple() else 'online'
+
         form_image_add = lk_form.AlbomsImageForm()
         if Profiles.objects.get(user__username=user_name).id in list(
                 map(lambda x: x[0], self.profile_request.values_list('profile_friendshiop'))):
@@ -62,13 +70,15 @@ class LKDetailView(generic.View):
                            "context": self.date,
                            "form_image_add": form_image_add,
                            "form_add_friend": form_add_friend,
-                           'user_name': user_name})
+                           'user_name': user_name,
+                           'status':self.status})
         return  render(request, 'lk/personal_account/lk_for_look_block.html',{"user_bio": self.user,
                        "profile": self.profile,
                        "context": self.date,
                        "form_image_add": form_image_add,
                        "form_add_friend": form_add_friend,
-                       'user_name': user_name})
+                       'user_name': user_name,
+                       'status':self.status})
 
 
 
@@ -91,13 +101,13 @@ class LKDetailView(generic.View):
                                                            user__username=user_name))
                 new_friend.save()
                 messages.success(requests, 'добавляем друга в базу дданных')
-                return redirect('home')
+                return redirect('lk:home')
             else:
                 del_friend = Friendship.objects.get(user_name=User.objects.get(pk=requests.user.id),
                                                     profile_friendshiop=Profiles.objects.get(user__username=user_name))
                 del_friend.delete()
                 messages.warning(requests, 'удаляем друга в базу дданных')
-                return redirect('home')
+                return redirect('lk:home')
         files_image_add = lk_form.AlbomsImageForm()
         return render(requests, 'lk/personal_account/lk_for_look.html',
                       {"user_bio": self.user, 'form_image_add': files_image_add, 'form_add_friend': "0"})
@@ -125,8 +135,8 @@ class LkDetailQuizView(generic.View):
                 messages.success(request,f'письмо отправленно успешно по адресу {request.user.email}')
             except:
                 messages.warning(request, 'не удалось отправить письмо, возможно вы не авторизованны или указали неверную почту')
-                return redirect('home')
-            return redirect('home')
+                return redirect('lk:home')
+            return redirect('lk:home')
 
 
 
@@ -166,6 +176,11 @@ class LkViewEdit(generic.View):
                     profile_user.show_profile = False
                 user.save()
                 profile_user.save()
-                return redirect('home')
+                return redirect('lk:home')
         return render(requests, 'lk/personal_account/lk_for_look_edit_form.html',
                       {'form_edit_lk': form_edit, "user_bio": requests.user})
+
+
+
+def dragdropview(request):
+    return render(request,'lk/dragdrop.html')

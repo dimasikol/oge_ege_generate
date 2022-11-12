@@ -6,10 +6,10 @@
 {% for user in users %}
     <div class="col-3" align="center">
     <div class="card" style="width: 18rem;">
-        <a href="{% url 'lk_for_look2' user.username %}">
+        <a href="{% url 'lk:lk_for_look2' user.username %}">
             <img src="{{ user.profiles.image_profile.url }}" class="card-img-top" alt="..."></a>
     <div class="card-body">
-        <a href="{% url 'lk_for_look2' user.username %}"><h5 class="card-title">{{ user.first_name }}</h5>
+        <a href="{% url 'lk:lk_for_look2' user.username %}"><h5 class="card-title">{{ user.first_name }}</h5>
     <h5 class="card-title">{{ user.last_name }}</h5></a>
            <div >
     </div>

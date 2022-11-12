@@ -5,14 +5,14 @@
 <div class="row">
 <div class="col">
   <div class="card mb-3 shadow-lg p-3 mb-5 bg-body rounded">
-  <p align="left">Мои подписки <a href="{% url 'lk_friendships' user %}">({% follower_count user.id %})</a></p>
-  <p align="left">Подписчики <a href="{% url 'lk_followings' user %}">{% following_count user %} </a></p>
+  <p align="left">Мои подписки<a href="{% url 'lk:lk_friendships' user %}">({% follower_count user.id %})</a></p>
+  <p align="left">Подписчики<a href="{% url 'lk:lk_followings' user %}">({% following_count user %}) </a></p>
 
 
 
       <div class="shadow-lg p-3 mb-4 bg-body rounded">
 {% for item in profile|slice:"0:5" %}
-    <a href="{% url 'lk_for_look2' item.profile_friendshiop.user %}"><img src="{{ item.profile_friendshiop.image_profile.url }}" width="105">
+    <a href="{% url 'lk:lk_for_look2' item.profile_friendshiop.user %}"><img src="{{ item.profile_friendshiop.image_profile.url }}" width="105">
             <p>{{ item.profile_friendshiop.user.first_name }}
                {{ item.profile_friendshiop.user.last_name }}</p>
     </a>
@@ -22,7 +22,7 @@
 </div>
 <div class="col-md-auto">
   home_page
-  <h5><a href="{% url 'lk_for_look_edit' request.user %}">редактировать</a></h5>
+  <h5><a href="{% url 'lk:lk_for_look_edit' request.user %}">редактировать</a></h5>
   <div class="card mb-3 shadow-lg p-3 mb-5 bg-body rounded" style="max-width: 1340px;">
   <div class="row g-4">
     <div class="col-md-4 col-md-4 shadow-lg p-3 mb-4 bg-body rounded ">
@@ -52,7 +52,7 @@
           {% for item in user_bio.profiles.albom.all|slice:"0:6" %}
              <img src="{{ item.image.url }}" width="200">
           {% endfor %}
-         <a href="{% url 'lk_albom' user %}">Открыть все</a>
+         <a href="{% url 'lk:lk_albom' user %}">Открыть все</a>
     </div>
     <form action="" method="POST" class="note-form" enctype="multipart/form-data">
     {% csrf_token %}
@@ -64,7 +64,7 @@
 </div>
 <div class = "container card-body col-md-4 border border-primary shadow-lg p-3 mb-5 bg-body rounded">
 {% for item in context %}
-  <p class=""> дата выполнения:  {{ item.date_create }}, кол-во выполненных заданий <strong>{{ item.result_fin|str_to_list:1 }} из {{ item.result_fin|str_to_list:0 }} {{ item.result_fin.quiz_true }}</strong><a href="{% url 'lk_detail_quiz' user item.id %}">тест</a></p>
+  <p class=""> дата выполнения:  {{ item.date_create }}, кол-во выполненных заданий <strong>{{ item.result_fin|str_to_list:1 }} из {{ item.result_fin|str_to_list:0 }} {{ item.result_fin.quiz_true }}</strong><a href="{% url 'lk:lk_detail_quiz' user item.id %}">тест</a></p>
 {% endfor %}
 </div>
 

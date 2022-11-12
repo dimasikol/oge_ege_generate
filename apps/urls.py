@@ -26,13 +26,13 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('ckeditor/', include('ckeditor_uploader.urls')),
 
-    path('', include('lk.urls')),
+    path('', include(('lk.urls','lk'),namespace='lk')),
     path('user/', include('users.urls')),
     path('autf/', include('users.urls')),
-    path('quiz/', include('quiz.urls')),
-    path('shop/', include('shop.urls')),
+    path('quiz/', include(('quiz.urls','quiz'), namespace='quiz')),
+    path('shop/', include(('shop.urls','shop'),namespace='shop')),
     path('chat/',include('privatmessages.urls')),
-
+    path('chat2/',include('chanelmessages.urls')),
 
     path('__debug__/', include('debug_toolbar.urls')),
 

@@ -1,9 +1,15 @@
 {% extends "quiz/base.html" %}
 {% block body %}
 <div class="container">
-    <div class="col-0">
-        <p><a class="nav-link" href="{% url 'quiz_generate_oge' %}">Генератор тестов OGE</a></p>
-        <p><a class="nav-link" href="/">Генератор тестов EGE</a></p>
+    <div class="row"></div>
+    <div class="col-2">
+        <p><a class="nav-link" href="{% url 'quiz:quiz_generate_oge' %}">Генератор тестов OGE</a></p>
+        <p><a class="nav-link" href="{% url 'quiz:quiz_result_oge' %}">Статистика ОГЭ</a></p>
     </div>
+    <div class="col-2">
+            <p><a class="nav-link" href="{% url 'quiz:quiz_generate_ege' %}">Генератор тестов EGE</a></p>
+    </div>
+
+
 </div>
     {% endblock body %}

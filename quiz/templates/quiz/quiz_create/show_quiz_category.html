@@ -1,33 +1,110 @@
 {% extends 'quiz/base.html' %}
-
 {% block body %}
-<div class="row row-cols-4 row-cols-md-6 g-4">
+<style>
+@import url('https://fonts.googleapis.com/css?family=Muli&display=swap');
+* {
+  box-sizing: border-box;
+}
+body {
+  font-family: 'Muli', sans-serif;
+  overflow: hidden;
+  margin: 0;
+  background:#111;
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.container {
+  width:100%;
+  display:flex;
+  padding:0 20px;
+}
+
+.slide{
+  height:80vh;
+  border-radius: 20px;
+  margin: 10px;
+  cursor: pointer;
+  color: #fff;
+  flex:1;
+  background-size: cover;
+  background-position: center;
+  background-no-repeat: no-repeat;
+  position: relative;
+  transition: all 500ms ease-in-out;
+
+}
+
+.slide a{
+  color:#fff;
+  position: absolute;
+  font-size: 44px;
+  bottom: 20px;
+  left: 20px;
+  margin: 0;
+  opacity: 0;
+}
+
+.slide.active {
+  flex:10;
+}
+
+.slide.active a {
+  opacity: 1;
+  transition: opacity 0.3s ease-in 0.5s;
+}</style>
+
+    <div class="container">
 
     {% for item in category_quiz %}
-        <div class="col shadow-lg p-3 mb-10 bg-body rounded">
-        <div class="card h-100">
-          <img src="{{ item.image.url }}" class="card-img-top" alt="{{ item.image }}">
-          <div class="card-body">
-            <h5 class="card-title"><a href="{% url 'quiz_category_filter' item.slug  %}">{{ item.name }}</a></h5>
-            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-          </div>
-          <div class="card-footer">
-            <small class="text-muted"></small>
-          </div>
-        </div>
-      </div>
-    {% endfor %}
+  <div class="slide" style="background-image: url({{ item.image.url }});">
+      <a href="{% url 'quiz:quiz_category_filter' item.slug  %}">{{ item.name }} | {{ item.slug }}</a>
+  </div>
 
+    {% endfor %}
+</div>
+
+
+
+
+
+<!--
     <div>
-        <form action="" method="POST">
+        Добавить
+        <form action="add_new_category_quiz" method="POST">
             {% csrf_token %}
-            <table>
-                 {{ form_create.as_table }}
-            </table>
-            <button type="submit">добавить</button>
+
+            <p>Имя:<input type="text" name="name" ></p>
+            <p>Slug:<input type="text" name="slug" ></p>
+            <p>Фото:<input type="file" name="image"></p>
+
+            <button type="submit">Добавить</button>
         </form>
 
     </div>
-</div>
+-->
 
+<script >
+
+
+function SlideReview(){
+    const slides = document.querySelectorAll('.slide')
+    slides[5].classList.add('active')
+for (const slide of slides){
+  slide.addEventListener('click',()=>{
+    clearActiveClasses()
+    slide.classList.add('active')
+  })
+}
+
+function clearActiveClasses() {
+  slides.forEach((slide)=>{
+    slide.classList.remove('active')
+  })}}
+SlideReview()
+
+
+</script>
 {% endblock body %}

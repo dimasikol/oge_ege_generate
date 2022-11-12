@@ -6,10 +6,10 @@
 {% for friend in friendship %}
     <div class="col-3" align="center">
     <div class="card" style="width: 18rem;">
-        <a href="{% url 'lk_for_look2' friend.profile_friendshiop.user %}">
+        <a href="{% url 'lk:lk_for_look2' friend.profile_friendshiop.user %}">
             <img src="{{ friend.profile_friendshiop.image_profile.url }}" class="card-img-top" alt="..."></a>
     <div class="card-body">
-        <a href="{% url 'lk_for_look2' friend.profile_friendshiop.user %}"><h5 class="card-title">{{ friend.profile_friendshiop.user.first_name }}</h5>
+        <a href="{% url 'lk:lk_for_look2' friend.profile_friendshiop.user %}"><h5 class="card-title">{{ friend.profile_friendshiop.user.first_name }}</h5>
     <h5 class="card-title">{{ friend.profile_friendshiop.user.last_name }}</h5></a>
            <div >
     </div>

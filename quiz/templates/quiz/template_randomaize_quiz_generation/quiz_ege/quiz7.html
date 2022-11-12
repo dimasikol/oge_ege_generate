@@ -1,0 +1,9 @@
+{% load static %}
+
+{% for item in answer7 %}
+    <div class="container card-body col-md-9 border border-primary shadow-lg p-3 mb-5 bg-body rounded">
+    <h5>Задание № 7</h5>
+   <h6>{{ item.quiz }}</h6>
+    <h5>Ответ:<input type="text" name="answer7" width="200" height="30"></h5>
+    </div>
+{% endfor %}
