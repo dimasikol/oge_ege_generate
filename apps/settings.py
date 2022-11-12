@@ -113,24 +113,24 @@ CHANNEL_LAYERS = {
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-DATABASES = {
+DATABASES_SQLite = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
-# DATABASES = {
-# 		'default': {
-#       	'ENGINE': 'django.db.backends.postgresql',
-#       	'HOST' : os.environ.get('POSTGRES_HOST', 'localhost'),
-#       	'NAME': os.environ.get('POSTGRES_DB', 'db_name'),
-#       	'USER': os.environ.get('POSTGRES_USER', 'username'),
-#       	'PASSWORD': os.environ.get('POSTGRES_PASSWORD', 'password'),
-#       	'PORT': os.environ.get('POSTGRES_PORT', '5432'),
-#     }
-# }
-
+DATABASES_POSTGERS = {
+		'default': {
+      	'ENGINE': 'django.db.backends.postgresql',
+      	'HOST' : os.environ.get('POSTGRES_HOST', 'localhost'),
+      	'NAME': os.environ.get('POSTGRES_DB', 'db_name'),
+      	'USER': os.environ.get('POSTGRES_USER', 'username'),
+      	'PASSWORD': os.environ.get('POSTGRES_PASSWORD', 'password'),
+      	'PORT': os.environ.get('POSTGRES_PORT', '5432'),
+    }
+}
+DATABASES=DATABASES_SQLite if DEBUG else DATABASES_POSTGERS
 
 
 # Password validation
@@ -234,13 +234,12 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 CKEDITOR_UPLOAD_PATH = "uploads/"
-STATIC_URL = 'static/'
 STATIC_ROOT = os.path.join(BASE_DIR,'static')
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR,'media/')
-STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+#STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 # STATICFILES_DIRS = [
 #    os.path.join(BASE_DIR, "static"),
 # ]
