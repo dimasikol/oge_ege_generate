@@ -1,10 +1,10 @@
 import datetime
-
 from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django import forms
+from django.utils import timezone
 
 
 class Profiles(models.Model):
@@ -21,7 +21,7 @@ class Profiles(models.Model):
     zodiac = models.CharField(max_length=25,choices=DATA['zodiac'], default='',blank=True)
     socionics_type = models.CharField(max_length=25,choices=DATA['socionics_type'],default='',blank=True)
     show_profile = models.BooleanField(default=True,blank=True)
-    status = models.DateTimeField(default=datetime.datetime.now(),blank=True)
+    status = models.DateTimeField(default=timezone.now(),blank=True)
     def __str__(self):
         return  f'{self.id} {self.user}'
 
