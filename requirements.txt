@@ -88,3 +88,4 @@ setuptools==65.3.0
 six==1.16.0
 social-auth-app-django==4.0.0
 social-auth-core==4.3.0
+whitenoise==6.2.0
