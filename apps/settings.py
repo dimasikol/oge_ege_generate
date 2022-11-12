@@ -45,7 +45,6 @@ INSTALLED_APPS = [
     'djoser',
     'crispy_forms',
     'crispy_bootstrap5',
-    'channels',
 
     'lk',
     'users',
@@ -53,9 +52,10 @@ INSTALLED_APPS = [
     'quiz',
     'shop',
     'privatmessages',
-    'chanelmessages',
 
 ]
+#'channels',
+#'chanelmessages',
 
 #    'debug_toolbar',
 
