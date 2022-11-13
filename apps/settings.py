@@ -26,7 +26,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY','django-insecure-8re*dlr1bqadk$21irkybl
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = bool(os.environ.get('DJANGO_DEBUG', True))
 CONTEXT = {}
-ALLOWED_HOSTS = ['generate-quiz-ege.herokuapp.com','127.0.0.1']
+ALLOWED_HOSTS = ['quiz-generate-oge.herokuapp.com','127.0.0.1']
 
 
 # Application definition
