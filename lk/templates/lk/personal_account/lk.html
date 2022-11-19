@@ -4,23 +4,25 @@
 {% load lk_tags %}
 <div class="row">
 <div class="col">
-  <div class="card mb-3 shadow-lg p-3 mb-5 bg-body rounded">
+  <div class="card mb-3 shadow-lg p-3 mb-5 bg-body rounded" style=" ">
   <p align="left">Мои подписки<a href="{% url 'lk:lk_friendships' user %}">({% follower_count user.id %})</a></p>
   <p align="left">Подписчики<a href="{% url 'lk:lk_followings' user %}">({% following_count user %}) </a></p>
 
 
 
-      <div class="shadow-lg p-3 mb-4 bg-body rounded">
+      <div class="shadow-lg p-3 mb-4 bg-body rounded" style="width:15%; min-width: 126px;
+  max-width: 25%;">
 {% for item in profile|slice:"0:5" %}
+    <div class="col-md-auto">
     <a href="{% url 'lk:lk_for_look2' item.profile_friendshiop.user %}"><img src="{{ item.profile_friendshiop.image_profile.url }}" width="105">
             <p>{{ item.profile_friendshiop.user.first_name }}
                {{ item.profile_friendshiop.user.last_name }}</p>
-    </a>
+    </a></div>
 {% endfor %}
     </div>
   </div>
 </div>
-<div class="col-md-auto">
+<div class="col-md-auto" style="max-width-75%">
   home_page
   <h5><a href="{% url 'lk:lk_for_look_edit' request.user %}">редактировать</a></h5>
   <div class="card mb-3 shadow-lg p-3 mb-5 bg-body rounded" style="max-width: 1340px;">

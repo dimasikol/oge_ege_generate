@@ -1,8 +1,11 @@
 import os,json,random
 from apps.settings import BASE_DIR
+from ..models.quiz_create import QuizCreate
 with open(os.path.join(BASE_DIR, r'quiz/logicquiz/scratch_2_ege.json'), 'r', encoding='UTF-8') as file2,open(os.path.join(BASE_DIR, r'quiz/logicquiz/scratch_1.json'), 'r', encoding='UTF-8') as file:
     date = json.load(file)
     date2 = json.load(file2)
+
+
 
 
 class Task7:

@@ -4,13 +4,13 @@
 <form action="" method="post">
     {% csrf_token %}
 {% for item in quiz %}
-    <div class="container card-body col-md-4 border border-primary shadow-lg p-3 mb-5 bg-body rounded">
+    <div class="container card-body col-md border border-primary shadow-lg p-3 mb-5 bg-body rounded">
     <h4>Задание № {{ forloop.counter }}   </h4>
     <hr style="color:blue;">
     {% autoescape off %}
     {{ item.question }}
     {% endautoescape %}
-    <p>Введите ответ <input type="text" name="answer"></p>
+    <p>Введите ответ на {{ forloop.counter }} <input type="text" name="answer{{ forloop.counter }}"></p>
     </div>
 {% endfor %}
 <div class="container card-body col-md-4 border border-primary shadow-lg p-3 mb-5 bg-body rounded">

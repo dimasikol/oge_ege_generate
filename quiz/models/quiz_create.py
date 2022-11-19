@@ -1,5 +1,6 @@
 from django.db import models
 from ckeditor_uploader.fields import RichTextUploadingField
+import random
 
 class QuizCategory(models.Model):
     name = models.CharField(verbose_name='имя категории',max_length=40,unique=True)
@@ -42,6 +43,7 @@ class Quiz(models.Model):
 class QuizCreate(models.Model):
     category_quiz = models.ForeignKey(Quiz,on_delete=models.CASCADE,related_name='quizes')
     question = RichTextUploadingField(verbose_name='вопрос')
+    type_ege = models.IntegerField(default=0,blank=True)
 
     def __str__(self):
         return f'{self.pk}'
@@ -51,15 +53,16 @@ class QuizCreate(models.Model):
 
 class QuizAnswerTrue(models.Model):
     answer_true = models.CharField(verbose_name='правильный ответ',max_length=1000)
-    quiz = models.ForeignKey(QuizCreate,on_delete=models.CASCADE,related_name='question_true')
+    quiz_true = models.ForeignKey(QuizCreate,on_delete=models.CASCADE,related_name='question_true')
     class Meta:
         verbose_name = 'Правильный ответ'
         verbose_name_plural = 'Правильные ответы'
-
+    def __str__(self):
+        return self.answer_true
 
 class QuizAnswerFalse(models.Model):
     answer_false = models.CharField(verbose_name='ложный ответ',max_length=1000)
-    quiz = models.ForeignKey(QuizCreate,on_delete=models.CASCADE,related_name='question_false')
+    quiz_false = models.ForeignKey(QuizCreate,on_delete=models.CASCADE,related_name='question_false')
     class Meta:
         verbose_name = 'Ложный ответ'
         verbose_name_plural = 'Ложные ответы'

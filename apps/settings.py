@@ -25,7 +25,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY','django-insecure-8re*dlr1bqadk$21irkybl
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = bool(os.environ.get('DJANGO_DEBUG', True))
-CONTEXT = {}
+CONTEXT = {'oge':{},'ege':{}}
 ALLOWED_HOSTS = ['quiz-generate-oge.herokuapp.com','127.0.0.1']
 
 
@@ -53,18 +53,20 @@ INSTALLED_APPS = [
     'shop',
     'privatmessages',
 
+
+'debug_toolbar',
+'channels',
+'chanelmessages',
 ]
-#'channels',
-#'chanelmessages',
 
-#    'debug_toolbar',
 
-# CHANNEL_LAYERS = {
-#     'default': {
-#         'BACKEND': 'asgiref.inmemory.ChannelLayer',
-#         'ROUTING': 'apps.channel_routing',
-#     },
-# }
+
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'asgiref.inmemory.ChannelLayer',
+        'ROUTING': 'apps.channel_routing',
+    },
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -236,13 +238,13 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 CKEDITOR_UPLOAD_PATH = "uploads/"
-STATIC_ROOT = os.path.join(BASE_DIR,'static')
+# STATIC_ROOT = os.path.join(BASE_DIR,'static')
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR,'media/')
 #STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
-# STATICFILES_DIRS = [
-#    os.path.join(BASE_DIR, "static"),
-# ]
+STATICFILES_DIRS = [
+   os.path.join(BASE_DIR, "static"),
+]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field

@@ -23,3 +23,8 @@ class QuizCategoryView(mixins.ListModelMixin,mixins.CreateModelMixin,mixins.Upda
 
     def delete(self, request, *args, **kwargs):
         return self.destroy(request, *args, kwargs)
+
+
+
+
+

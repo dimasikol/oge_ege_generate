@@ -2,6 +2,13 @@
 <nav id="navbar-example2" class="navbar bg-light px-3">
     <a class="navbar-brand" href="/">Навигация</a>
     <ul class="nav nav-pills">
+        {% if test_status.0 %}
+<li class="nav-item"><a class="nav-link" href="{% url 'quiz:quiz_generate_oge' %}">Продолжить тест по ОГЭ</a></li>
+        {% endif %}
+
+        {% if test_status.1 %}
+<li class="nav-item"><a class="nav-link" href="{% url 'quiz:quiz_generate_ege' %}">Продолжить тест по ЕГЭ</a></li>
+        {% endif %}
 
         <li class="nav-item"><a class="nav-link" href="{% url 'show_all_people' %}">Все пользователи</a></li>
         <li class="nav-item"><a class="nav-link" href="{% url 'shop:category' %}">shop</a></li>

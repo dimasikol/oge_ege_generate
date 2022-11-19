@@ -1,5 +1,5 @@
 import datetime
-
+from apps.settings import CONTEXT
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, redirect
 from django.template.loader import render_to_string
@@ -22,9 +22,10 @@ class LkView(generic.View):
             self.profile = Friendship.objects.filter(user_name_id=User.objects.get(username=self.user))
             form_image_add = lk_form.AlbomsImageForm()
             self.status_user = Profiles.objects.get(user=self.user)
+            self.test_status=[requests.user in CONTEXT['oge'],requests.user in CONTEXT['ege']]
             self.status_user.status = datetime.datetime.now()
             self.status_user.save()
-            return render(requests, 'lk/personal_account/lk.html',{"user_bio": self.user,"profile": self.profile,"context": self.date, 'form_image_add': form_image_add})
+            return render(requests, 'lk/personal_account/lk.html',{"user_bio": self.user,"profile": self.profile,"context": self.date, 'form_image_add': form_image_add,'test_status':self.test_status})
         return redirect('login')
 
     def post(self, requests):

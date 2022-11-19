@@ -2,13 +2,17 @@ from django.shortcuts import render, redirect
 from django.views import View
 from ..models import quiz_create
 from django.contrib.auth.mixins import LoginRequiredMixin
+from rest_framework.views import APIView
+from rest_framework import permissions
 
-class QuizCategoryView(View):
+class QuizCategoryView(APIView):
+    permission_classes = [permissions.IsAuthenticated]
     def get(self,requests):
         date = quiz_create.QuizCategory.objects.all()
         return render(requests,'quiz/quiz_create/show_quiz_category.html',context={"category_quiz":date})
 
-class ShowCategoryQuizView(View):
+class ShowCategoryQuizView(APIView):
+    permission_classes = [permissions.IsAuthenticated]
     def get(self,requests,name):
         date = quiz_create.Quiz.objects.filter(category_quiz__slug=name)
         return render(requests,'quiz/quiz_create/show_quiz_category_filter.html',{"quizs":date})

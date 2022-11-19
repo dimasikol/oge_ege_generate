@@ -7,7 +7,7 @@
     <div class="col-3" align="center">
     <div class="card" style="width: 18rem;">
         <a href="{% url 'lk:lk_for_look2' user.username %}">
-            <img src="{{ user.profiles.image_profile.url }}" class="card-img-top" alt="..."></a>
+            <img src="{{ user.profiles.image_profile.url }}" style="    width: 200px; height:250px; float: center; margin: 0 0 0 3.5%; background: #f0f0f0; border-radius: 5px; padding: 2%;" class="card-img-top" alt="..."></a>
     <div class="card-body">
         <a href="{% url 'lk:lk_for_look2' user.username %}"><h5 class="card-title">{{ user.first_name }}</h5>
     <h5 class="card-title">{{ user.last_name }}</h5></a>

@@ -2,7 +2,175 @@
 {% load static %}
 
 {%  block body %}
+<form action="{% url 'quiz:quiz_generate_ege' %}" method="post">
+{% csrf_token %}
 
-{% include "quiz/template_randomaize_quiz_generation/quiz_ege/quiz7.html" %}
+{% autoescape off %}
+
+    {% for question in quiz1 %}
+        <h4>Задания №1</h4>
+        {{ question.question }}
+        <h6 style="color:red;"> otvet: <input type="text" name="quiz1"> {{ question.question_true.all.0 }}</h6>
+
+{% endfor %}
+
+    {% for question in quiz2 %}
+        {{ question.question }}
+                <h6 style="color:red;"> otvet: <input type="text" name="quiz2"> {{ question.question_true.all.0 }}</h6>
+    {% endfor %}
+
+    {% for question in quiz3 %}
+        {{ question.question }}
+        <h1 style="color:red;"> otvet: <input type="text" name="quiz3"> {{ question.question_true.all.0 }}</h1>
+    {% endfor %}
+
+    {% for question in quiz4 %}
+        {{ question.question }}
+                <h1 style="color:red;"> otvet: <input type="text" name="quiz4"> {{ question.question_true.all.0 }}</h1>
+
+    {% endfor %}
+
+    {% for question in quiz5 %}
+        {{ question.question }}
+                <h1 style="color:red;"> otvet: <input type="text" name="quiz5"> {{ question.question_true.all.0 }}</h1>
+
+    {% endfor %}
+
+    {% for question in quiz6 %}
+        {{ question.question }}
+                <h1 style="color:red;"> otvet: <input type="text" name="quiz6"> {{ question.question_true.all.0 }}</h1>
+
+    {% endfor %}
+
+    {% for question in quiz7 %}
+        {{ question.question }}
+                <h1 style="color:red;"> otvet: <input type="text" name="quiz7"> {{ question.question_true.all.0 }}</h1>
+
+    {% endfor %}
+
+    {% for question in quiz8 %}
+        {{ question.question }}
+            <h1 style="color:red;"> otvet: <input type="text" name="quiz8"> {{ question.question_true.all.0 }}</h1>
+
+    {% endfor %}
+
+    {% for question in quiz9 %}
+        {{ question.question }}
+        <h1 style="color:red;"> otvet: <input type="text" name="quiz9">{{ question.question_true.all.0 }}</h1>
+
+    {% endfor %}
+
+    {% for question in quiz10 %}
+        {{ question.question }}
+        <h1 style="color:red;"> otvet: <input type="text" name="quiz10"> {{ question.question_true.all.0 }}</h1>
+
+    {% endfor %}
+
+    {% for question in quiz11 %}
+        {{ question.question }}
+        <h1 style="color:red;"> otvet: <input type="text" name="quiz11">{{ question.question_true.all.0 }}</h1>
+
+    {% endfor %}
+
+    {% for question in quiz12 %}
+        {{ question.question }}
+        <h1 style="color:red;"> otvet: <input type="text" name="quiz12">{{ question.question_true.all.0 }}</h1>
+
+    {% endfor %}
+
+    {% for question in quiz13 %}
+        {{ question.question }}
+        <h1 style="color:red;"> otvet:<input type="text" name="quiz13"> {{ question.question_true.all.0 }}</h1>
+
+    {% endfor %}
+
+    {% for question in quiz14 %}
+        {{ question.question }}
+        <h1 style="color:red;"> otvet:<input type="text" name="quiz14"> {{ question.question_true.all.0 }}</h1>
+
+    {% endfor %}
+
+    {% for question in quiz15 %}
+        {{ question.question }}
+        <h1 style="color:red;"> otvet:<input type="text" name="quiz15"> {{ question.question_true.all.0 }}</h1>
+
+    {% endfor %}
+
+    {% for question in quiz16 %}
+        {{ question.question }}
+        <h1 style="color:red;"> otvet:<input type="text" name="quiz16"> {{ question.question_true.all.0 }}</h1>
+
+    {% endfor %}
+
+    {% for question in quiz17 %}
+        {{ question.question }}
+        <h1 style="color:red;"> otvet:<input type="text" name="quiz17"> {{ question.question_true.all.0 }}</h1>
+
+    {% endfor %}
+
+    {% for question in quiz18 %}
+        {{ question.question }}
+        <h1 style="color:red;"> otvet:<input type="text" name="quiz18"> {{ question.question_true.all.0 }}</h1>
+
+    {% endfor %}
+
+    {% for question in quiz19 %}
+        {{ question.question }}
+        <h1 style="color:red;"> otvet:<input type="text" name="quiz19"> {{ question.question_true.all.0 }}</h1>
+
+    {% endfor %}
+
+    {% for question in quiz20 %}
+        {{ question.question }}
+        <h1 style="color:red;"> otvet:<input type="text" name="quiz20"> {{ question.question_true.all.0 }}</h1>
+
+    {% endfor %}
+
+    {% for question in quiz21 %}
+        {{ question.question }}
+        <h1 style="color:red;"> otvet:<input type="text" name="quiz21"> {{ question.question_true.all.0 }}</h1>
+
+    {% endfor %}
+
+    {% for question in quiz22 %}
+        {{ question.question }}
+        <h1 style="color:red;"> otvet:<input type="text" name="quiz22"> {{ question.question_true.all.0 }}</h1>
+
+    {% endfor %}
+
+    {% for question in quiz23 %}
+        {{ question.question }}
+        <h1 style="color:red;"> otvet:<input type="text" name="quiz23"> {{ question.question_true.all.0 }}</h1>
+
+    {% endfor %}
+
+    {% for question in quiz24 %}
+        {{ question.question }}
+        <h1 style="color:red;"> otvet:<input type="text" name="quiz24"> {{ question.question_true.all.0 }}</h1>
+
+    {% endfor %}
+
+    {% for question in quiz25 %}
+        {{ question.question }}
+        <h1 style="color:red;"> otvet:<input type="text" name="quiz25"> {{ question.question_true.all.0 }}</h1>
+
+    {% endfor %}
+
+    {% for question in quiz26 %}
+        {{ question.question }}
+        <h1 style="color:red;"> otvet:<input type="text" name="quiz26"> {{ question.question_true.all.0 }}</h1>
+
+    {% endfor %}
+
+    {% for question in quiz27 %}
+        {{ question.question }}
+        <h1 style="color:red;"> otvet:<input type="text" name="quiz27"> {{ question.question_true.all.0 }}</h1>
+
+    {% endfor %}
+
+<input type="submit" name="answer" value="True">
+</form>
+{% endautoescape %}
+
 
 {% endblock body %}
