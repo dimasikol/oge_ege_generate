@@ -26,7 +26,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY','django-insecure-8re*dlr1bqadk$21irkybl
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = bool(os.environ.get('DJANGO_DEBUG', True))
 CONTEXT = {'oge':{},'ege':{}}
-ALLOWED_HOSTS = ['quiz-generate-oge.herokuapp.com','127.0.0.1']
+#ALLOWED_HOSTS = ['quiz-generate-oge.herokuapp.com','127.0.0.1']
 
 
 # Application definition
@@ -53,10 +53,9 @@ INSTALLED_APPS = [
     'shop',
     'privatmessages',
 
-
-'debug_toolbar',
-'channels',
-'chanelmessages',
+    'debug_toolbar',
+    'channels',
+    'chanelmessages',
 ]
 
 
@@ -216,10 +215,11 @@ CRISPY_TEMPLATE_PACK = 'bootstrap5'
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
-
-# INTERNAL_IPS = [
-#     "127.0.0.1",
-# ]
+#INTERNAL_IPS =["127.0.0.1",]
+# if DEBUG:
+#     import socket
+#     hostname,_,ips = socket.gethostbyname_ex(socket.gethostname())
+#     INTERNAL_IPS = [ip[: ip.rfind(".")] + ".1" for ip in ips] + ["127.0.0.1", "10.0.2.2"]
 
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'
