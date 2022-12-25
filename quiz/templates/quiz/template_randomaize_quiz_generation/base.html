@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 {% load static %}
-<html lang="en">
+<html lang="ru" style="font-family: PTSans;">
 <head>
-    <meta charset="UTF-8">
+    <meta charset=utf-8">
 
     <title>{% block title %} {% endblock title %}</title>
     {% block header %} {% include "quiz/include/header.html" %} {% endblock header %}
 </head>
 <body>
-    <h1>base'h1'</h1>
+    Вариант №
     {% block nav %}{% endblock nav %}
 {% autoescape off %}
 
@@ -60,11 +60,14 @@
 
         <button type="submit"><b>отправить на проверку</b></button>
 </form>
-{% endautoescape %}
+    <form action="" method="get">
+        <button type="submit" name="send-pdf">send pdf </button>
+    </form>
+
+    {% endautoescape %}
 
 
     {% block footer %} {% include "quiz/include/footer.html" %}  {% endblock footer %}
-
 
 </body>
 

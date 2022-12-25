@@ -1,6 +1,9 @@
+import requests
 from django.shortcuts import render,redirect
 from django.views import generic
 from django.http import HttpResponseRedirect
+import json
+from instrumenst.pdf.pdf_creater import create_pdf_at_html
 from ..logicquiz import check_test
 from ..models.quiz_result_student import QuizResult
 from apps.settings import CONTEXT
@@ -22,12 +25,16 @@ class ShowQuizView(APIView):
     def get(self,request,**kwargs):
         # дописать функцию таймера!!!
         if request.user in CONTEXT['oge'] and 'timer':
+            if 'send-pdf' in request.GET:
+                self.req=render(request, "quiz/template_randomaize_quiz_generation/base.html",context=CONTEXT['oge'][request.user]).content.decode('utf-8')
+                self.req2=self.req[:-700]
+                r=create_pdf_at_html(self.req2,user_name=request.user.email)
+                CONTEXT['oge'][request.user]['create_pdf'] = r
             return render(request, "quiz/template_randomaize_quiz_generation/base.html",context=CONTEXT['oge'][request.user])
 
         if sum(list(map(lambda x: int(x) if str(x).isdigit() else 0,list(request.GET.values()))))==0:
             return redirect('quiz:quiz_generate_oge')
         CONTEXT['oge'][request.user] = check_test.context(request.GET)
-
         return render(request,"quiz/template_randomaize_quiz_generation/base.html",context=CONTEXT['oge'][request.user])
 
     def post(self,request,**kwargs):
@@ -48,5 +55,3 @@ class ShowQuizView(APIView):
             del CONTEXT['oge'][request.user]
             return render(request,"quiz/template_randomaize_quiz_generation/quiz_oge/quiz_result.html")
         return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
-
-

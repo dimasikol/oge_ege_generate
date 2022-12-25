@@ -1,2 +1,2 @@
 "# django_quiz" 
-last push update 22.11.22 
+last push update 22.11.22
