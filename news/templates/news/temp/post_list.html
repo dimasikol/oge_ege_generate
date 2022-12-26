@@ -1,0 +1,17 @@
+{% extends 'news/base.html' %}
+
+{% block title %}
+    News
+{% endblock title %}
+
+{% block body %}
+{% for item in context  %}
+<div>
+    <div class="container">
+        <a href="{% url 'news:post' item.category.slug item.slug %}">{{ item.name }}</a>
+<img src="{{ item.image.url }}" alt="нет фото" style="width:150px;">
+
+    </div>
+    </div>
+{% endfor %}
+{% endblock body %}

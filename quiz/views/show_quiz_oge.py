@@ -30,11 +30,13 @@ class ShowQuizView(APIView):
                 self.req2=self.req[:-700]
                 r=create_pdf_at_html(self.req2,user_name=request.user.email)
                 CONTEXT['oge'][request.user]['create_pdf'] = r
+                CONTEXT['oge'][request.user]['counter'] = CONTEXT['oge']['counter']
             return render(request, "quiz/template_randomaize_quiz_generation/base.html",context=CONTEXT['oge'][request.user])
 
         if sum(list(map(lambda x: int(x) if str(x).isdigit() else 0,list(request.GET.values()))))==0:
             return redirect('quiz:quiz_generate_oge')
         CONTEXT['oge'][request.user] = check_test.context(request.GET)
+        CONTEXT['oge'][request.user]['counter'] = CONTEXT['oge']['counter']
         return render(request,"quiz/template_randomaize_quiz_generation/base.html",context=CONTEXT['oge'][request.user])
 
     def post(self,request,**kwargs):

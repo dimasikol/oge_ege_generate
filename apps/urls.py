@@ -29,6 +29,7 @@ urlpatterns = [
     path('', include(('lk.urls','lk'),namespace='lk')),
     path('quiz/', include(('quiz.urls', 'quiz'), namespace='quiz')),
     path('shop/', include(('shop.urls', 'shop'), namespace='shop')),
+    path('news/',include(('news.urls','news'),namespace='news')),
 
     path('user/', include('users.urls')),
     path('chat/', include('privatmessages.urls')),

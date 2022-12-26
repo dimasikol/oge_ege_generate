@@ -1,0 +1,17 @@
+{% extends 'news/base.html' %}
+
+{% block title %}
+    News
+{% endblock title %}
+
+{% block body %}
+<div>
+    <div class="container">
+        <a href="">{{ context.name }}</a>
+<img src="{{ context.image.url }}" alt="нет фото" style="width:150px;">
+    {% autoescape off %}
+        {{ context.text }}
+    {% endautoescape %}
+    </div>
+    </div>
+{% endblock body %}
