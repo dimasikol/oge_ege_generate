@@ -4,7 +4,6 @@ from apps.settings import BASE_DIR
 with open(os.path.join(BASE_DIR, r'quiz/logicquiz/scratch_1.json'), 'r', encoding='UTF-8') as file:
     date = json.load(file)
 
-
 class Task1:
     Task_num=0
     def __init__(self):

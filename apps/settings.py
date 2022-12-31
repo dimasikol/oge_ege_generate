@@ -24,9 +24,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY','django-insecure-8re*dlr1bqadk$21irkyblpcod31#)!gqcne@j@35e5z*i9h_%')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = bool(os.environ.get('DJANGO_DEBUG', True))
+DEBUG =  False#bool(os.environ.get('DJANGO_DEBUG', True))
 CONTEXT = {'oge':{'counter':0},'ege':{'counter':0},'counter':0}
-#ALLOWED_HOSTS = ['quiz-generate-oge.herokuapp.com','127.0.0.1']
+ALLOWED_HOSTS = ['192.168.88.200',]
 
 
 # Application definition
@@ -132,7 +132,7 @@ DATABASES_POSTGERS = {
       	'PORT': os.environ.get('POSTGRES_PORT', '5432'),
     }
 }
-DATABASES=DATABASES_SQLite if DEBUG else DATABASES_POSTGERS
+DATABASES=DATABASES_SQLite #DATABASES_SQLite if DEBUG else DATABASES_POSTGERS
 
 
 # Password validation
