@@ -1,3 +1,4 @@
+
 import datetime
 
 from django.db import models
@@ -18,10 +19,10 @@ class Chat(models.Model):
 
 
 class Message(models.Model):
-    chat = models.ForeignKey(Chat,on_delete=models.DO_NOTHING,related_name='chat')
-    author = models.ForeignKey(User,on_delete=models.DO_NOTHING,related_name='author')
+    chat = models.ForeignKey(Chat,on_delete=models.CASCADE,related_name='chat')
+    author = models.ForeignKey(User,on_delete=models.CASCADE,related_name='author')
     message = RichTextUploadingField()
-    pub_date = models.DateTimeField(default=datetime.datetime.now(),blank=True)
+    pub_date = models.DateTimeField(auto_now_add=True,blank=True)
     is_readed = models.BooleanField(default=False)
 
 

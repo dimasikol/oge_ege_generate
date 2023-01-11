@@ -6,6 +6,7 @@ from .forms import RegisterForm,AccountAuthenticationForm # RenameForm, RenameFo
 from django.contrib.auth import login, logout, authenticate
 from .models import Profiles
 
+
 def sign_up(requests):
     """Регистрация"""
     if requests.method == 'POST':
@@ -15,7 +16,7 @@ def sign_up(requests):
             login(requests, user)
             profiles=Profiles(user=user)
             profiles.save()
-            return redirect('/accounts/profile/')
+            return redirect('lk:home')
     else:
         form = RegisterForm()
     return render(requests, 'registration/sign-up.html', {"form": form})
@@ -41,6 +42,7 @@ def login_view(requests,*args,**kwargs):
         else:
             context['login_form'] = form
     return render(requests,template_name='registration/login.html',context=context)
+
 
 def get_redirect_if_exists(requests):
     redirect = None

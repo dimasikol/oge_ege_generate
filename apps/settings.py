@@ -16,17 +16,14 @@ from datetime import timedelta
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 #AUTH_USER_MODEL = 'users.UserNet'
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
-
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get('SECRET_KEY','django-insecure-8re*dlr1bqadk$21irkyblpcod31#)!gqcne@j@35e5z*i9h_%')
-
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG =  False#bool(os.environ.get('DJANGO_DEBUG', True))
+DEBUG =  True #bool(os.environ.get('DJANGO_DEBUG', True))
 CONTEXT = {'oge':{'counter':0},'ege':{'counter':0},'counter':0}
-ALLOWED_HOSTS = ['192.168.88.200',]
+ALLOWED_HOSTS = ['192.168.88.200','185.246.193.35','127.0.0.1','localhost']
 
 
 # Application definition
@@ -56,9 +53,9 @@ INSTALLED_APPS = [
 
     'debug_toolbar',
     'channels',
-    'chanelmessages',
-]
 
+]
+##'chanelmessages',
 
 
 CHANNEL_LAYERS = {
@@ -108,7 +105,7 @@ CHANNEL_LAYERS = {
     'default': {
         'BACKEND': 'channels_redis.core.RedisChannelLayer',
         'CONFIG': {
-            "hosts": [('127.0.0.1', 6379)],
+            "hosts": [('192.168.88.200', 6379),('127.0.0.1', 6379)],
         },
     },
 }
@@ -215,8 +212,9 @@ CRISPY_TEMPLATE_PACK = 'bootstrap5'
 
 
 # Internationalization
+if not(DEBUG):
+    INTERNAL_IPS =["192.168.88.200",]
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
-#INTERNAL_IPS =["127.0.0.1",]
 # if DEBUG:
 #     import socket
 #     hostname,_,ips = socket.gethostbyname_ex(socket.gethostname())
@@ -231,7 +229,7 @@ TIME_ZONE = 'UTC'
 
 USE_I18N = True
 
-USE_TZ = True
+USE_TZ = False
 
 
 # Static files (CSS, JavaScript, Images)
@@ -239,14 +237,15 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 CKEDITOR_UPLOAD_PATH = "uploads/"
-# STATIC_ROOT = os.path.join(BASE_DIR,'static')
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR,'media/')
-#STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
-STATICFILES_DIRS = [
-   os.path.join(BASE_DIR, "static"),
-]
 
+#STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+if DEBUG:
+    MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+    STATICFILES_DIRS = [os.path.join(BASE_DIR, "static"),]
+else:
+    STATIC_ROOT = os.path.join(BASE_DIR,'static')
+    MEDIA_ROOT = 'media/'
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 

@@ -19,7 +19,7 @@ class StatisticEgeView(APIView):
             self.data_ege[users] = {answer: [0, 0] for answer in StatisticEgeView.DATA_EGE}
 
         for quiz in self.quiz_result_ege:
-            self.result = eval(quiz.result)
+            self.result = eval(quiz.result) # перевод ид str в Dict
             for self.key in self.result.keys():
                 self.key2=self.key.replace('quiz','answer')
                 self.data_ege[quiz.student][self.key2] = [self.data_ege[quiz.student][self.key2][0] + self.result[self.key][0],    self.data_ege[quiz.student][self.key2][1] + self.result[self.key][1]]

@@ -6,25 +6,26 @@
 {% endblock header %}
 {% block body %}
 {{ user }}
-{{ chat.members.all }}
-<!--{% if user in chat.members.all %}-->
-<div class="container col border border-primary shadow-lg p-3 mb-5 bg-body rounded" style="height:700px; border: 1px solid; overflow: auto;">
+{% if user == chat.members.all.0 or user == chat.members.all.1 %}
+
+<div class="container col border border-primary shadow-lg p-3 mb-5 bg-body rounded" style="max-height:350px; border: 1px solid; overflow: auto;">
     {% for message in chat.chat.all %}
     <div class="row border border-primary shadow-lg" style="">
     <div class="col-2"><a href="{% url  'lk:lk_for_look2' message.author %}">
     <img src="{{ message.author.profiles.image_profile.url }}" width="50" ></a>
     </div>
-    <div class="col-9">{{ message.message }}</div>
+    <div class="col-9" style="overflow-wrap: break-word;">{{ message.message }}</div>
     <div class="col-1">{{ message.pub_date|date:'d.m.y H:i' }}</div>
         </div>
     {% endfor %}
-    <div class="container ">
+
+</div>
+<div class="container" style="padding:0; border:1px;">
         <form method="post">
             {% csrf_token %}
             {{ form.message }}
             <button id="buttonmessageform" type="submit" onclick="return ETextEditor.validateForm('message-form')"><span class="ico ico-comment"></span>send</button>
         </form>
     </div>
-</div>
-<!--{% endif %}-->
+{% endif %}
 {% endblock body %}

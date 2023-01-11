@@ -35,7 +35,8 @@
         <h4 class="card-title">{{ user_bio.first_name }} {{ user_bio.last_name }}</h4>
         <hr>
         <h4 class="card-text"><p><small class="text-muted">день рождения: </small>{{ user_bio.profiles.birthday }}</p></h4>
-        <h4 class="card-text" style="text-align:left;"><p><small class="text-muted">страна: </small>{{ user_bio.profiles.location }}</p></h4>
+          <h4 class="card-text" style="text-align:left;"><p><small class="text-muted">класс: </small>{{ user_bio.profiles.profile_class }}</p></h4>
+          <h4 class="card-text" style="text-align:left;"><p><small class="text-muted">страна: </small>{{ user_bio.profiles.location }}</p></h4>
         <h4 class="card-text" style="text-align:left;"><p><small class="text-muted">город: </small>{{ user_bio.profiles.city }}</p></h4>
         <h4 class="card-text" style="text-align:left;"><p><small class="text-muted">зодиак: </small>{{ user_bio.profiles.zodiac }}</p></h4>
         <h4 class="card-text" style="text-align:left;"><p><small class="text-muted">соцпортрет: </small>{{ user_bio.profiles.socionics_type }}</p></h4>

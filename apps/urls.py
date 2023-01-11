@@ -23,7 +23,7 @@ urlpatterns = [
     path('auth/', include('djoser.urls')),
     path('auth/token/', obtain_auth_token, name='token'),
     path('_nested_admin/', include('nested_admin.urls')),
-    path('admin/', admin.site.urls),
+    path('deadempty/admin/', admin.site.urls),
     path('ckeditor/', include('ckeditor_uploader.urls')),
 
     path('', include(('lk.urls','lk'),namespace='lk')),
@@ -34,11 +34,11 @@ urlpatterns = [
     path('user/', include('users.urls')),
     path('chat/', include('privatmessages.urls')),
     path('autf/', include('users.urls')),
-    path('chat2/',include('chanelmessages.urls')),
 
     path('__debug__/', include('debug_toolbar.urls')),
 
 ]
+#    path('chat2/',include('chanelmessages.urls')),
 
 
 # path('auth/', include('djoser.urls')),
@@ -48,3 +48,4 @@ urlpatterns = [
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+

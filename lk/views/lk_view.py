@@ -25,6 +25,7 @@ class LkView(generic.View):
             self.test_status=[requests.user in CONTEXT['oge'],requests.user in CONTEXT['ege']]
             self.status_user.status = datetime.datetime.now()
             self.status_user.save()
+            print(self.test_status)
             return render(requests, 'lk/personal_account/lk.html',{"user_bio": self.user,"profile": self.profile,"context": self.date, 'form_image_add': form_image_add,'test_status':self.test_status})
         return redirect('login')
 
@@ -152,11 +153,14 @@ class LkViewEdit(generic.View):
                                                                                    'form_edit_user': form_edit_user})
 
     def post(self, requests, user_name):
+        print('test1')
         if requests.method == "POST":
+            print("test2")
             form_edit = lk_form.EditLkForm(requests.POST, requests.FILES)
             form_edit_user = RenameForm(requests.POST)
             form_image_add = lk_form.AlbomsImageForm()
-            if form_edit.is_valid() and form_edit_user.is_valid():  # and form_edit_user.is_valid():
+            if form_edit.is_valid() and form_edit_user.is_valid():
+                print('test3')
                 user = User.objects.get(username=requests.user)
                 user.first_name = form_edit_user.cleaned_data['first_name']
                 user.last_name = form_edit_user.cleaned_data['last_name']
@@ -170,6 +174,7 @@ class LkViewEdit(generic.View):
                 profile_user.about = form_edit.cleaned_data['about']
                 profile_user.zodiac = form_edit.cleaned_data['zodiac']
                 profile_user.socionics_type = form_edit.cleaned_data['socionics_type']
+                profile_user.profile_class = form_edit.cleaned_data['profile_class']
                 print()
                 if form_edit.cleaned_data['show_profile']:
                     profile_user.show_profile = True
@@ -179,7 +184,7 @@ class LkViewEdit(generic.View):
                 profile_user.save()
                 return redirect('lk:home')
         return render(requests, 'lk/personal_account/lk_for_look_edit_form.html',
-                      {'form_edit_lk': form_edit, "user_bio": requests.user})
+                      {'form_edit_lk': form_edit, "user_bio": requests.user,})
 
 
 

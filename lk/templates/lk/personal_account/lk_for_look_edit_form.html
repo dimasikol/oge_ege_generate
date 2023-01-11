@@ -27,8 +27,15 @@
           <label for="Email">Email:</label>
           <h4 class="card-text"><input class="form-control" id="Email" type="email" name="email" value="{{ user_bio.email }}"/></h4>
 
-          </div>
 
+<label for="klass">Класс: </label>
+    <select class="form-select" name="profile_class" id="klass">
+        <option class="form-select" value="{{ user_bio.profiles.profile_class }}" selected>{{ user_bio.profiles.profile_class }}</option>
+        {% for item in user_bio.profiles.DATA.klass %}
+            <option value="{{ item.0 }}">{{ item.1 }}</option>
+        {% endfor %}
+    </select>
+          </div>
           <div class="col">
             <label for="about">о себе</label>
             <h4 class="card-text" id="about" ><textarea class="form-control" name="about" style="display: inline-block;" rows="8">{{ user_bio.profiles.about }}</textarea></h4>
@@ -57,12 +64,10 @@
 <label for="socionics_type">социопортрет: </label>
     <select class="form-select" name="socionics_type" id="socionics_type">
         <option value="{{ user_bio.profiles.socionics_type }}" selected>{{ user_bio.profiles.socionics_type }}</option>
-
         {% for item in user_bio.profiles.DATA.socionics_type %}
             <option value="{{ item.0 }}">{{ item.1 }}</option>
         {% endfor %}
     </select>
-
                 </div>
             <div class="col-md-7 shadow-lg p-3 mb-5 bg-body rounded">
             12

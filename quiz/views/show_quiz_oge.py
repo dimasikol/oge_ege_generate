@@ -14,8 +14,8 @@ class QuizView(APIView):
     permission_classes = [permissions.IsAuthenticated]
 
     def get(self,request,**kwargs):
-        if request.user in CONTEXT['oge'] and 'timer':
-            return render(request, "quiz/template_randomaize_quiz_generation/base.html",context=CONTEXT['oge'][request.user])
+        if self.request.user.id in CONTEXT['oge'] and 'timer':
+            return render(request, "quiz/template_randomaize_quiz_generation/base.html",context=CONTEXT['oge'][self.request.user])
         return render(request,"quiz/template_randomaize_quiz_generation/quiz_oge/quiz_choice.html")
 
 
@@ -24,36 +24,40 @@ class ShowQuizView(APIView):
 
     def get(self,request,**kwargs):
         # дописать функцию таймера!!!
-        if request.user in CONTEXT['oge'] and 'timer':
+        if request.user.id in CONTEXT['oge'] and 'timer':
+            print('good',CONTEXT)
+            print(request.user.id)
             if 'send-pdf' in request.GET:
-                self.req=render(request, "quiz/template_randomaize_quiz_generation/base.html",context=CONTEXT['oge'][request.user]).content.decode('utf-8')
+                self.req=render(request, "quiz/template_randomaize_quiz_generation/base.html",context=CONTEXT['oge'][request.user.id]).content.decode('utf-8')
                 self.req2=self.req[:-700]
                 r=create_pdf_at_html(self.req2,user_name=request.user.email)
-                CONTEXT['oge'][request.user]['create_pdf'] = r
-                CONTEXT['oge'][request.user]['counter'] = CONTEXT['oge']['counter']
-            return render(request, "quiz/template_randomaize_quiz_generation/base.html",context=CONTEXT['oge'][request.user])
+                CONTEXT['oge'][request.user.id]['create_pdf'] = r
+                CONTEXT['oge'][request.user.id]['counter'] = CONTEXT['oge']['counter']
+            return render(request, "quiz/template_randomaize_quiz_generation/base.html",context=CONTEXT['oge'][request.user.id])
 
         if sum(list(map(lambda x: int(x) if str(x).isdigit() else 0,list(request.GET.values()))))==0:
             return redirect('quiz:quiz_generate_oge')
-        CONTEXT['oge'][request.user] = check_test.context(request.GET)
-        CONTEXT['oge'][request.user]['counter'] = CONTEXT['oge']['counter']
-        return render(request,"quiz/template_randomaize_quiz_generation/base.html",context=CONTEXT['oge'][request.user])
+        if not(request.user.id in CONTEXT['oge']):
+            CONTEXT['oge'][request.user.id] = check_test.context(request.GET)
+            CONTEXT['oge'][request.user.id]['counter'] = CONTEXT['oge']['counter']
+        print('bad',CONTEXT)
+        return render(request,"quiz/template_randomaize_quiz_generation/base.html",context=CONTEXT['oge'][request.user.id])
 
     def post(self,request,**kwargs):
         if request.method == 'POST': #and str(request.user)!="AnonymousUser":
             answer_all = {}
             results_fin = [0,0]
             for type_answer in request.POST:
-                if type_answer in CONTEXT['oge'][request.user]:
-                    answer_all[type_answer]=[len(CONTEXT['oge'][request.user][type_answer]),0]
-                    for i in range(len(CONTEXT['oge'][request.user][type_answer])):
-                        answer_all[type_answer].append({type_answer:[(dict(request.POST)[type_answer][i]),CONTEXT['oge'][request.user][type_answer][i]['answer']]})
+                if type_answer in CONTEXT['oge'][request.user.id]:
+                    answer_all[type_answer]=[len(CONTEXT['oge'][request.user.id][type_answer]),0]
+                    for i in range(len(CONTEXT['oge'][request.user.id][type_answer])):
+                        answer_all[type_answer].append({type_answer:[(dict(request.POST)[type_answer][i]),CONTEXT['oge'][request.user.id][type_answer][i]['answer']]})
                         results_fin[0] += 1
                     date = [str(item[type_answer][0])==str(item[type_answer][1]) if isinstance(item,dict) else 0 for item in answer_all[type_answer]]
                     results_fin[1]+=sum(date)
                     answer_all[type_answer][1]=sum(date)
-            base_date=QuizResult(answer=dict(request.POST),student=request.user,question_number="answer1",question_type='oge',quiz = CONTEXT['oge'][request.user],result=answer_all,result_fin=results_fin)
+            base_date=QuizResult(answer=dict(request.POST),student=request.user,question_number="answer1",question_type='oge',quiz = CONTEXT['oge'][request.user.id],result=answer_all,result_fin=results_fin)
             base_date.save()
-            del CONTEXT['oge'][request.user]
+            del CONTEXT['oge'][request.user.id]
             return render(request,"quiz/template_randomaize_quiz_generation/quiz_oge/quiz_result.html")
-        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+        return redirect('lk:home')

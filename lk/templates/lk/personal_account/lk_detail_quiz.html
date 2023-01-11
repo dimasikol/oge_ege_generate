@@ -89,7 +89,7 @@
     <p>Задание № 5</p>
     <p> {{ item.quiz }}  </p>
 
-    <p style="color:green; font-style: italic;">Ответ: {{ item.answer }}</p>
+    <p style="color:green; font-style: italic;">Ответ: {{ item.answer.1 }}</p>
         <p style="color:red;">Ваш ответ: {% autoescape on %} {{context.answer.answer5|get_pos:forloop.counter0 }} {% endautoescape %}</p>
 
     </div>
