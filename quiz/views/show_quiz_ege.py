@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect,HttpResponse
 from ..logicquiz import check_test
 from ..models.quiz_create import QuizCreate
 from ..models.quiz_result_student import QuizResult
-from apps.settings import CONTEXT
+from quiz.logicquiz.check_test import CONTEXT
 from rest_framework import permissions
 from rest_framework.views import APIView
 class GenerateQuizEge(APIView):

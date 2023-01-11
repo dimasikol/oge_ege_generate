@@ -1,6 +1,6 @@
 from . import task1,generate_answer,task2
-from apps.settings import CONTEXT
 import random
+CONTEXT = {'oge':{'counter':0},'ege':{'counter':0},'counter':0}
 
 
 def context(count_elements):

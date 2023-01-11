@@ -6,7 +6,7 @@ import json
 from instrumenst.pdf.pdf_creater import create_pdf_at_html
 from ..logicquiz import check_test
 from ..models.quiz_result_student import QuizResult
-from apps.settings import CONTEXT
+from ..logicquiz.check_test import CONTEXT
 from rest_framework.views import APIView
 from rest_framework import permissions
 from ..logicquiz import func_spec
@@ -15,6 +15,7 @@ class QuizView(APIView):
 
     def get(self,request,**kwargs):
         if self.request.user.id in CONTEXT['oge'] and 'timer':
+            print(CONTEXT)
             return render(request, "quiz/template_randomaize_quiz_generation/base.html",context=CONTEXT['oge'][self.request.user.id])
         else:
             return render(request,"quiz/template_randomaize_quiz_generation/quiz_oge/quiz_choice.html")

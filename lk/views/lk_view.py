@@ -1,5 +1,5 @@
 import datetime
-from apps.settings import CONTEXT
+from quiz.logicquiz.check_test import CONTEXT
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, redirect
 from django.template.loader import render_to_string
