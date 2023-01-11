@@ -9,14 +9,15 @@ from ..models.quiz_result_student import QuizResult
 from apps.settings import CONTEXT
 from rest_framework.views import APIView
 from rest_framework import permissions
-
+from ..logicquiz import func_spec
 class QuizView(APIView):
     permission_classes = [permissions.IsAuthenticated]
 
     def get(self,request,**kwargs):
         if self.request.user.id in CONTEXT['oge'] and 'timer':
-            return render(request, "quiz/template_randomaize_quiz_generation/base.html",context=CONTEXT['oge'][self.request.user])
-        return render(request,"quiz/template_randomaize_quiz_generation/quiz_oge/quiz_choice.html")
+            return render(request, "quiz/template_randomaize_quiz_generation/base.html",context=CONTEXT['oge'][self.request.user.id])
+        else:
+            return render(request,"quiz/template_randomaize_quiz_generation/quiz_oge/quiz_choice.html")
 
 
 class ShowQuizView(APIView):
@@ -25,8 +26,6 @@ class ShowQuizView(APIView):
     def get(self,request,**kwargs):
         # дописать функцию таймера!!!
         if request.user.id in CONTEXT['oge'] and 'timer':
-            print('good',CONTEXT)
-            print(request.user.id)
             if 'send-pdf' in request.GET:
                 self.req=render(request, "quiz/template_randomaize_quiz_generation/base.html",context=CONTEXT['oge'][request.user.id]).content.decode('utf-8')
                 self.req2=self.req[:-700]
@@ -40,7 +39,6 @@ class ShowQuizView(APIView):
         if not(request.user.id in CONTEXT['oge']):
             CONTEXT['oge'][request.user.id] = check_test.context(request.GET)
             CONTEXT['oge'][request.user.id]['counter'] = CONTEXT['oge']['counter']
-        print('bad',CONTEXT)
         return render(request,"quiz/template_randomaize_quiz_generation/base.html",context=CONTEXT['oge'][request.user.id])
 
     def post(self,request,**kwargs):
@@ -53,7 +51,7 @@ class ShowQuizView(APIView):
                     for i in range(len(CONTEXT['oge'][request.user.id][type_answer])):
                         answer_all[type_answer].append({type_answer:[(dict(request.POST)[type_answer][i]),CONTEXT['oge'][request.user.id][type_answer][i]['answer']]})
                         results_fin[0] += 1
-                    date = [str(item[type_answer][0])==str(item[type_answer][1]) if isinstance(item,dict) else 0 for item in answer_all[type_answer]]
+                    date = [func_spec.check_answer(item[type_answer][0],item[type_answer][1]) if isinstance(item,dict) else 0 for item in answer_all[type_answer]]
                     results_fin[1]+=sum(date)
                     answer_all[type_answer][1]=sum(date)
             base_date=QuizResult(answer=dict(request.POST),student=request.user,question_number="answer1",question_type='oge',quiz = CONTEXT['oge'][request.user.id],result=answer_all,result_fin=results_fin)

@@ -152,7 +152,7 @@
     "text1":"Доступ к файлу",
     "text2": "находящемуся на сервере",
     "text3": "осуществляется по протоколу",
-    "text4": "Фрагменты адреса файла закодированы буквами от А до Ж. Запишите последовательность этих букв, кодирующую адрес указанного файла в сети Интернет.",
+    "text4": "Фрагменты адреса файла закодированы буквами от A до I. Запишите последовательность этих букв, кодирующую адрес указанного файла в сети Интернет.",
     "address": {
     "top_level_domain": ["ru","com","site","ea","org","us","net","uk","edu","fr","sk","de","cz","gov","info","it","se"],
     "second_level_domain": ["yandex","youtube","google","vk","mail","ok","avito","instagram","turbopages","gismeteo","wildberries","facebook","wikipedia","google","market","kinopoisk","lenta","ria","gosuslugi","ozon","rambler","rbc","news","xvideos","aliexpress","drom","sberbank","twitter","ficbook","championat","mk","pikabu","whatsapp","novostinedeli24","hh","dns-shop","hitmo","auto","twitch","livejournal","kp","music","drive2","lentainform","tiktok","glavnoe","2gis","sports","aliexpress","fandom","onelink","litnet","roblox","rt","samsung","sportbox","tass","gazeta","vz","news","sportmail","primpress","rp5","mos","ivi","cian","tinkoff","yaplakal","xnxx","t","rg","mts","mirconnect","sport-express","citilink","pochta","kommersant","tutu","leroymerlin","jut","hotmo","tsargrad","yandex","otzovik","echo","pinterest","beeline","mvideo","booking","youla","consultant","fontanka","auto","vseinstrumenti","nalog","smi2","irecommend","mangalib","cloud"],
